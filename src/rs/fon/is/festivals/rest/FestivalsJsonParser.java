@@ -49,9 +49,9 @@ public class FestivalsJsonParser {
 				JsonObject artistJson = new JsonObject();
 				artistJson.addProperty("artistName", artist.getName());
 				JsonArray genresArray = new JsonArray();
-				if (!artist.getGenres().isEmpty()) {
-					JsonObject genreJson = new JsonObject();
+				if (!artist.getGenres().isEmpty()) {					
 					for (Genre genre : artist.getGenres()) {
+						JsonObject genreJson = new JsonObject();
 						genreJson.addProperty("genreTitle", genre.getTitle());
 						genresArray.add(genreJson);
 					}
