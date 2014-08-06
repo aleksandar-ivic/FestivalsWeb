@@ -122,7 +122,7 @@ public class FestivalParser {
 					genre = g;
 				}
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				new ArrayList<>();
 				e1.printStackTrace();
 			}
 			
