@@ -1,14 +1,19 @@
 package rs.fon.is.festivals.rest;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 
 @Path("/festivals")
 public class FestivalsRest {
 	
 	@GET
-	public String getFestivalsWithGenre(){
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getFestivalsWithGenre(@DefaultValue("") @QueryParam("genre") String genre){
 		return "radi";
 	}
 
