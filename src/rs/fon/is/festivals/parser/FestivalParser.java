@@ -23,6 +23,7 @@ import rs.fon.is.festivals.domain.Genre;
 import rs.fon.is.festivals.domain.Interval;
 import rs.fon.is.festivals.domain.Location;
 import rs.fon.is.festivals.domain.MusicArtist;
+import rs.fon.is.festivals.persistence.DataModelManager;
 import rs.fon.is.festivals.util.URIGenerator;
 import rs.fon.is.festivals.util.Util;
 import rs.fon.is.festivals.util.XMLParser;
@@ -108,6 +109,7 @@ public class FestivalParser {
 					try {
 						genre.setUri(URIGenerator.generate(genre));
 						mapOfGenres.put(tag, genre);
+						DataModelManager.getInstance().save(genre);
 						try {
 							Util.saveMap(mapOfGenres);
 						} catch (Exception e) {
