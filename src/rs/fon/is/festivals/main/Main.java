@@ -14,19 +14,20 @@ import org.json.JSONObject;
 import rs.fon.is.festivals.domain.Festival;
 import rs.fon.is.festivals.parser.FestivalParser;
 import rs.fon.is.festivals.persistence.DataModelManager;
+import rs.fon.is.festivals.rest.FestivalsJsonParser;
 import rs.fon.is.festivals.util.Util;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException, JSONException {
 
-		ArrayList<Festival> allFestivals = new ArrayList<>();
 		ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
 		Festival festival = FestivalParser.parse(ids.get(0));
-		DataModelManager.getInstance().save(festival);
-		DataModelManager.getInstance().closeDataModel();
+		System.out.println(FestivalsJsonParser.serializeFestival(festival));
+		//DataModelManager.getInstance().save(festival);
+		//DataModelManager.getInstance().closeDataModel();
 		//allFestivals.add(festival);
-		Util.writeFestivalsToJson(festival, 1);
+		//Util.writeFestivalsToJson(festival, 1);
 
 	}
 

@@ -59,8 +59,8 @@ public class FestivalsJsonParser {
 				}
 				artistsArray.add(artistJson);
 			}
-			
 		}
+		festivalJson.add("lineup", artistsArray);
 
 		return festivalJson;
 	}
