@@ -50,6 +50,11 @@ public class DataModelManager {
 		return reader.load(uri);
 	}
 	
+	public void printout() {
+		getModel().write(System.out, "TURTLE");
+
+	}
+	
 	public void closeDataModel() {
 		dataProvider.close();
 	}

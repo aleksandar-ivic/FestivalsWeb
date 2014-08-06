@@ -23,7 +23,11 @@ public class Main {
 
 		ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
 		Festival festival = FestivalParser.parse(ids.get(0));
+		
 		System.out.println(FestivalsJsonParser.serializeFestival(festival));
+		DataModelManager.getInstance().save(festival);
+		DataModelManager.getInstance().printout();
+		DataModelManager.getInstance().closeDataModel();
 		//DataModelManager.getInstance().save(festival);
 		//DataModelManager.getInstance().closeDataModel();
 		//allFestivals.add(festival);

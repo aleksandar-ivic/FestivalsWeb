@@ -18,10 +18,6 @@ public class TDBDataProvider implements DataProvider {
 		return dataset.getDefaultModel();
 	}
 	
-	public void printOut(){
-		((Model) dataset).write(System.out, "TURTLE");
-	}
-	
 	@Override
 	public void close() {
 		dataset.close();
