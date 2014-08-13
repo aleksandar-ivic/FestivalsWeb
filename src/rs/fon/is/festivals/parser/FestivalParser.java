@@ -75,7 +75,7 @@ public class FestivalParser {
 			e.printStackTrace();
 		}
 
-		System.out.println(genres);
+		//System.out.println(genres);
 		return festival;
 	}
 
@@ -97,7 +97,6 @@ public class FestivalParser {
 			}
 			try {
 				musicArtist.setUri(URIGenerator.generate(musicArtist));
-				DataModelManager.getInstance().save(musicArtist);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 				return new ArrayList<>();
@@ -119,7 +118,6 @@ public class FestivalParser {
 					try {
 						genre.setUri(URIGenerator.generate(genre));
 						mapOfGenres.put(tag, genre);
-						DataModelManager.getInstance().save(genre);
 						try {
 							Util.saveMap(mapOfGenres);
 						} catch (Exception e) {
@@ -132,14 +130,13 @@ public class FestivalParser {
 					}
 				} else {
 					genre = g;
+					genre.setUri(URIGenerator.generate(genre));
 				}
 			} catch (Exception e1) {
 				new ArrayList<>();
 				e1.printStackTrace();
 			}
-			
 			genres.add(genre);
-
 		}
 		return genres;
 	}
@@ -152,7 +149,6 @@ public class FestivalParser {
 			double[] latlng = getLatAndLng(city);
 			Location location = new Location(city, latlng[0], latlng[1]);
 			location.setUri(URIGenerator.generate(location));
-			DataModelManager.getInstance().save(location);
 			return location;
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -166,7 +162,6 @@ public class FestivalParser {
 			Date end = event.getEndDate();
 			Interval interval = new Interval(start, end);
 			interval.setUri(URIGenerator.generate(interval));
-			DataModelManager.getInstance().save(interval);
 			return interval;
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -178,7 +173,7 @@ public class FestivalParser {
 	private static double[] getLatAndLng(String city) throws Exception {
 		double[] latlng = new double[2];
 		String url = "http://api.geonames.org/searchJSON?q=" + city
-				+ "&maxRows=1&username=thecoa4";
+				+ "&maxRows=1&username=" + user;
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 

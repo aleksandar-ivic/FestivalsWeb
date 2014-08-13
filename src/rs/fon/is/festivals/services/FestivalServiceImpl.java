@@ -42,7 +42,7 @@ public class FestivalServiceImpl implements FestivalService {
 			}
 			return festivals;
 		}
-		return null;
+		return new ArrayList<>();
 	}
 
 	@Override

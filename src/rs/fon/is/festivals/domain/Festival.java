@@ -25,7 +25,7 @@ public class Festival extends Thing {
 	@RdfProperty(Constants.EVENT + "place")
 	private Location location;
 	
-	@RdfProperty(Constants.MO + "genre")
+	@RdfProperty(Constants.MO + "Genre")
 	private Collection<Genre> genres;
 
 	public Festival() {

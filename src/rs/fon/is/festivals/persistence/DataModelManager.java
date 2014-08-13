@@ -43,7 +43,7 @@ public class DataModelManager {
 	}
 	
 	public void save(Object o) {
-		writer.save(o);
+		writer.saveDeep(o);
 	}
 	
 	public Object load(String uri) {
@@ -54,7 +54,6 @@ public class DataModelManager {
 		getModel().write(System.out, "TURTLE");
 
 	}
-	
 	public void closeDataModel() {
 		dataProvider.close();
 	}
