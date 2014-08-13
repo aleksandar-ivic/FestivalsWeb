@@ -27,10 +27,10 @@ public class FestivalServiceImpl implements FestivalService {
 		
 		//where
 		query.append("WHERE {");
-		query.append("?festival a mo:Festival .");
-		query.append("?festival mo:genre ?genre .");
-		query.append("?genre a mo:Genre .");
-		query.append("?genre dc:title ?genreName .");
+		query.append("?festival a mo:Festival ;");
+		query.append("	mo:genre ?genre .");
+		query.append("?genre a mo:Genre ;");
+		query.append("	dc:title ?genreName .");
 		query.append("FILTER regex(?genreName,\"" + genre + "\")");
 		query.append("}");
 		Collection<String> queryResults =  queryExecutor.executeOneVariableSelectSparqlQuery(query.toString(), "festival", DataModelManager.getInstance().getModel());

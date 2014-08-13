@@ -75,6 +75,7 @@ public class FestivalParser {
 			e.printStackTrace();
 		}
 
+		System.out.println(genres);
 		return festival;
 	}
 
@@ -88,11 +89,12 @@ public class FestivalParser {
 			Collection<Genre> MAgenres = parseGenres(artist);
 			genres.addAll(MAgenres);
 
-			for (Genre genre : genres) {
+			for (Genre genre : MAgenres) {
 				musicArtist.getGenres().add(genre.getTitle());
 			}
 			try {
 				musicArtist.setUri(URIGenerator.generate(musicArtist));
+				DataModelManager.getInstance().save(musicArtist);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 				return new ArrayList<>();
@@ -147,6 +149,7 @@ public class FestivalParser {
 			double[] latlng = getLatAndLng(city);
 			Location location = new Location(city, latlng[0], latlng[1]);
 			location.setUri(URIGenerator.generate(location));
+			DataModelManager.getInstance().save(location);
 			return location;
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -160,6 +163,7 @@ public class FestivalParser {
 			Date end = event.getEndDate();
 			Interval interval = new Interval(start, end);
 			interval.setUri(URIGenerator.generate(interval));
+			DataModelManager.getInstance().save(interval);
 			return interval;
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
