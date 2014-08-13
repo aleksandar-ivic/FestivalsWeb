@@ -16,6 +16,7 @@ public class Genre extends Thing implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@RdfProperty(Constants.DC + "title")
 	private String title;
 	

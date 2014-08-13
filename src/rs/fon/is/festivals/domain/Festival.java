@@ -24,6 +24,9 @@ public class Festival extends Thing {
 
 	@RdfProperty(Constants.EVENT + "place")
 	private Location location;
+	
+	@RdfProperty(Constants.MO + "genre")
+	private Collection<Genre> genres;
 
 	public Festival() {
 	}
@@ -32,7 +35,8 @@ public class Festival extends Thing {
 		this.festivalName = festivalName;
 		this.interval = interval;
 		this.location = location;
-		this.lineup = new ArrayList<MusicArtist>();
+		this.lineup = new ArrayList<>();
+		this.genres = new ArrayList<>();
 	}
 
 	public String getFestivalName() {
@@ -65,6 +69,14 @@ public class Festival extends Thing {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	public Collection<Genre> getGenres(){
+		return genres;
+	}
+	
+	public void setGenres(Collection<Genre> genres){
+		this.genres = genres;
 	}
 
 	@Override

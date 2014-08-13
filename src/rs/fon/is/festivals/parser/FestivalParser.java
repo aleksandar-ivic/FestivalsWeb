@@ -33,7 +33,8 @@ public class FestivalParser {
 	private static String key = "26440e0193813621bf98c49ab9fd67cc";
 	private static String user = "thecoa4";
 	private static String URL = "http://ws.audioscrobbler.com/2.0/?method=geo.getEvents&location=Europe&distance=100&festivalsonly=1&api_key=26440e0193813621bf98c49ab9fd67cc&page=";
-
+	private static Festival festival = null;
+	
 	public static ArrayList<String> getAllFestivalsIDs() {
 		ArrayList<String> ids = new ArrayList<>();
 		for (int i = 1; i <= 10; i++) {
@@ -43,14 +44,14 @@ public class FestivalParser {
 	}
 
 	public static Festival parse(String festivalID) {
-		Festival festival = new Festival();
+		festival = new Festival();
 
 		// getting info about festival from last.fm
 		Event event = Event.getInfo(festivalID, key);
 		String festivalName = event.getTitle();
 		festival.setFestivalName(festivalName);
 
-		// getting beggin and end date
+		// getting start and end date
 		Interval interval = parseInterval(event);
 		if (interval != null) {
 			festival.setInterval(interval);
@@ -84,8 +85,11 @@ public class FestivalParser {
 			MusicArtist musicArtist = new MusicArtist(artistName);
 
 			Collection<Genre> genres = parseGenres(artist);
+			festival.setGenres(genres);
 
-			musicArtist.setGenres(genres);
+			for (Genre genre : genres) {
+				musicArtist.getGenres().add(genre.getTitle());
+			}
 			try {
 				musicArtist.setUri(URIGenerator.generate(musicArtist));
 			} catch (URISyntaxException e) {

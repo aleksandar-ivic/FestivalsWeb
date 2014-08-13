@@ -26,7 +26,6 @@ public class FestivalsRest {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getFestivalsWithGenre(@DefaultValue("") @QueryParam("genre") String genre){
-		
 		Collection<Festival> festivals = festivalsRepository.getFestivals(genre);
 		if (festivals != null && !festivals.isEmpty()) {
 			JsonArray festivalsArray = new JsonArray();
@@ -36,7 +35,7 @@ public class FestivalsRest {
 			}
 			return festivalsArray.toString();
 		}
-		throw new WebApplicationException(Response.Status.NO_CONTENT);		
+		throw new WebApplicationException(Response.Status.NO_CONTENT);
 	}
 
 }

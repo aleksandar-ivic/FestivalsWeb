@@ -16,12 +16,12 @@ public class MusicArtist extends Thing{
 	@RdfProperty(Constants.FOAF + "name")
 	private String name;
 	
-	@RdfProperty(Constants.MO + "Genre")
-	private Collection<Genre> genres;
+	@RdfProperty(Constants.DC + "subject")
+	private Collection<String> genres;
 	
 	public MusicArtist(String name){
 		this.name = name;
-		this.genres = new ArrayList<Genre>();
+		this.genres = new ArrayList<String>();
 	}
 
 	public String getName() {
@@ -32,11 +32,11 @@ public class MusicArtist extends Thing{
 		this.name = name;
 	}
 
-	public Collection<Genre> getGenres() {
+	public Collection<String> getGenres() {
 		return genres;
 	}
 
-	public void setGenres(Collection<Genre> genres) {
+	public void setGenres(Collection<String> genres) {
 		this.genres = genres;
 	}
 	
