@@ -87,10 +87,13 @@ public class FestivalParser {
 			MusicArtist musicArtist = new MusicArtist(artistName);
 
 			Collection<Genre> MAgenres = parseGenres(artist);
-			genres.addAll(MAgenres);
+			//genres.addAll(MAgenres);
 
 			for (Genre genre : MAgenres) {
 				musicArtist.getGenres().add(genre.getTitle());
+				if (!genres.contains(genre)) {
+					genres.add(genre);
+				}
 			}
 			try {
 				musicArtist.setUri(URIGenerator.generate(musicArtist));

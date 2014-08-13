@@ -12,9 +12,11 @@ public class Main {
 
 		ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
 		Festival festival = FestivalParser.parse(ids.get(0));
-		System.out.println(festival.getFestivalName());
-		DataModelManager.getInstance().save(festival);
-		DataModelManager.getInstance().closeDataModel();
+		System.out.println(festival.getUri());
+		System.out.println(festival.getLocation().getUri());
+		System.out.println(festival.getInterval().getUri());
+		//DataModelManager.getInstance().save(festival);
+		//DataModelManager.getInstance().closeDataModel();
 
 	}
 
