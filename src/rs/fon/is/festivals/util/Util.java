@@ -18,6 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.JsonObject;
+
+import riotcmd.json;
 import rs.fon.is.festivals.domain.Festival;
 import rs.fon.is.festivals.domain.Genre;
 
@@ -69,54 +72,19 @@ public class Util {
 		}
 		return null;
 	}
-
-	public static void writeLocationJSON(Festival festival) {
-		String jsonString = "{\"coordinates\":[{\"city\":\"" + festival.getLocation().getLocationName() +"\", \"lat\":"
-				+ festival.getLocation().getLat() + ", \"lng\":"
-				+ festival.getLocation().getLng() + "}]}";
-		System.out.println(jsonString);
-		JSONObject json;
-		FileWriter file = null;
-		try {
-			json = new JSONObject(jsonString);
-
-			file = new FileWriter(
-					"C:\\Bitnami\\wampstack-5.4.28-0\\apache2\\htdocs\\coordinates.json");
-
-			file.write(json.toString());
-
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				file.flush();
-				file.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-	}
-	
+	/*
 	public static void writeGenresToJson(){
-		String jsonString = "[{\"genres\":[";
+		JSONArray jsonArray = new JSONArray();
+		JsonObject jsonObject = new JsonObject();
 		HashMap<String, Genre> mapOfGenres = loadMap();
 		for (String genre: mapOfGenres.keySet()) {
-			jsonString += "{\"genre\":\"" + genre + "\"},";
+			jsonObject.addProperty("genre", value);
 		}
-		
-		
-		String newJson = (String) jsonString.subSequence(0, 795);
-		newJson += "]}]";
+
 		System.out.println(newJson);
-		JSONArray json;
 		FileWriter file = null;
 		try {
-			json = new JSONArray(newJson);
+			
 
 			file = new FileWriter(
 					"C:\\Bitnami\\wampstack-5.4.28-0\\apache2\\htdocs\\genres.json");
@@ -139,23 +107,7 @@ public class Util {
 			
 		}
 		
-	}
-	
-	public static void writeFestivalsToJson(Festival festival, int numOfFestivals){
-		StringBuffer jsonString = new StringBuffer(festivalsJsonString);
-		if (num == 0) {
-			jsonString.append("[{\"festivals\":[");
-			jsonString.append("{\"festival\":[\"festivalName\":\""+festival.getFestivalName() + "\",");
-			jsonString.append("\"interval\":[\"start\":\"" + festival.getInterval().getStart() + "\",");
-			jsonString.append("\"end\":\"" + festival.getInterval() + "\"],");
-			jsonString.append("}]");
-			num++;
-		}else if (num == numOfFestivals) {
-			jsonString.append("}]");
-		}else{
-			jsonString.append("{\"festival\":[\"festivalName\":\""+festival.getFestivalName() + "\"");
-		}
-		System.out.println(jsonString.toString());
-	}
+	}*/
+
 
 }

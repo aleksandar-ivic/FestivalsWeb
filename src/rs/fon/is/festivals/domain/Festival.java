@@ -19,13 +19,13 @@ public class Festival extends Thing {
 	@RdfProperty(Constants.EVENT + "time")
 	private Interval interval;
 
-	@RdfProperty(Constants.MO + "MusicArtist")
+	@RdfProperty(Constants.MO + "musicArtist")
 	private Collection<MusicArtist> lineup;
 
 	@RdfProperty(Constants.EVENT + "place")
 	private Location location;
 	
-	@RdfProperty(Constants.MO + "Genre")
+	@RdfProperty(Constants.MO + "genre")
 	private Collection<Genre> genres;
 
 	public Festival() {

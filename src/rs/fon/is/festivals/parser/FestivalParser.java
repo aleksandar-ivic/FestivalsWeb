@@ -67,6 +67,7 @@ public class FestivalParser {
 		Collection<MusicArtist> lineup = parseArtists(event);
 		festival.setLineup(lineup);
 		festival.setGenres(genres);
+
 		
 		try {
 			festival.setUri(URIGenerator.generate(festival));
