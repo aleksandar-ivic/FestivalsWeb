@@ -21,7 +21,7 @@ import rs.fon.is.festivals.services.FestivalServiceImpl;
 @Path("/festivals")
 public class FestivalsRest {
 	
-	private FestivalServiceImpl festivalsRepository;
+	private FestivalServiceImpl festivalsRepository = new FestivalServiceImpl();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

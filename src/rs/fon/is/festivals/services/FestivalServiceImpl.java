@@ -18,22 +18,27 @@ public class FestivalServiceImpl implements FestivalService {
 	@Override
 	public Collection<Festival> getFestivals(String genre) {
 		StringBuffer query = new StringBuffer();
-		//prefix part
+		// prefix part
 		query.append("PREFIX dc:<" + Constants.DC + ">");
-		query.append("PREFIX mo:<" + Constants.MO + ">");
+		query.append("PREFIX mo:<" + Constants.MO + "> \n");
 	    query.append("PREFIX ns:<" + Constants.NS + ">");
-		//select part
-		query.append("SELECT ?festival");
+		// select part
+		query.append("SELECT ?festival \n");
+
+		// where
+		query.append("WHERE\n{\n");
+		query.append(" \t?festival a mo:Festival.\n");
 		
-		//where
-		query.append("WHERE {");
-		query.append("?festival a mo:Festival ;");
-		query.append("	mo:genre ?genre .");
-		query.append("?genre a mo:Genre ;");
-		query.append("	dc:title ?genreName .");
-		query.append("FILTER regex(?genreName,\"" + genre + "\")");
+		 //query.append("	mo:genre ?genre .");
+		 //query.append("?genre a mo:Genre ;");
+		 //query.append("	dc:title ?genreName .");
+		 //query.append("FILTER regex(?genreName,\"" + "80s" + "\")");
+		 
 		query.append("}");
-		Collection<String> queryResults =  queryExecutor.executeOneVariableSelectSparqlQuery(query.toString(), "festival", DataModelManager.getInstance().getModel());
+		QueryExecutor queryExecutor = new QueryExecutor();
+		Collection<String> queryResults = queryExecutor
+				.executeOneVariableSelectSparqlQuery(query.toString(),
+						"festival", DataModelManager.getInstance().getModel());
 		Collection<Festival> festivals = new ArrayList<>();
 		if (queryResults != null && !queryResults.isEmpty()) {
 			for (String uri : queryResults) {
@@ -43,6 +48,7 @@ public class FestivalServiceImpl implements FestivalService {
 			return festivals;
 		}
 		return null;
+
 	}
 
 	@Override

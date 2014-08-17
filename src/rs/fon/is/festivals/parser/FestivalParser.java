@@ -1,12 +1,12 @@
 package rs.fon.is.festivals.parser;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -23,7 +23,6 @@ import rs.fon.is.festivals.domain.Genre;
 import rs.fon.is.festivals.domain.Interval;
 import rs.fon.is.festivals.domain.Location;
 import rs.fon.is.festivals.domain.MusicArtist;
-import rs.fon.is.festivals.persistence.DataModelManager;
 import rs.fon.is.festivals.util.URIGenerator;
 import rs.fon.is.festivals.util.Util;
 import rs.fon.is.festivals.util.XMLParser;
@@ -34,7 +33,7 @@ public class FestivalParser {
 	private static String user = "thecoa4";
 	private static String URL = "http://ws.audioscrobbler.com/2.0/?method=geo.getEvents&location=Europe&distance=100&festivalsonly=1&api_key=26440e0193813621bf98c49ab9fd67cc&page=";
 	private static Collection<Genre> genres = new ArrayList<>();
-	
+
 	public static ArrayList<String> getAllFestivalsIDs() {
 		ArrayList<String> ids = new ArrayList<>();
 		for (int i = 1; i <= 10; i++) {
@@ -53,6 +52,7 @@ public class FestivalParser {
 
 		// getting start and end date
 		Interval interval = parseInterval(event);
+		System.out.println(interval);
 		if (interval != null) {
 			festival.setInterval(interval);
 		}
@@ -68,7 +68,6 @@ public class FestivalParser {
 		festival.setLineup(lineup);
 		festival.setGenres(genres);
 
-		
 		try {
 			festival.setUri(URIGenerator.generate(festival));
 		} catch (URISyntaxException e) {
@@ -76,7 +75,7 @@ public class FestivalParser {
 			e.printStackTrace();
 		}
 
-		//System.out.println(genres);
+		// System.out.println(genres);
 		return festival;
 	}
 
@@ -88,7 +87,7 @@ public class FestivalParser {
 			MusicArtist musicArtist = new MusicArtist(artistName);
 
 			Collection<Genre> MAgenres = parseGenres(artist);
-			//genres.addAll(MAgenres);
+			// genres.addAll(MAgenres);
 
 			for (Genre genre : MAgenres) {
 				musicArtist.getGenres().add(genre.getTitle());
