@@ -18,6 +18,10 @@ public class Location extends Thing {
 	@RdfProperty(Constants.GEO + "long")
 	private double lng;
 
+	public Location() {
+
+	}
+
 	public Location(String locationName, double lat, double lng) {
 		this.locationName = locationName;
 		this.lat = lat;

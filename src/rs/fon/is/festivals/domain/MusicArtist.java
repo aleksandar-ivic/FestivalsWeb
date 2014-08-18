@@ -8,18 +8,21 @@ import thewebsemantic.Namespace;
 import thewebsemantic.RdfProperty;
 import thewebsemantic.RdfType;
 
-
 @Namespace(Constants.MO)
 @RdfType("MusicArtist")
-public class MusicArtist extends Thing{
+public class MusicArtist extends Thing {
 
 	@RdfProperty(Constants.FOAF + "name")
 	private String name;
-	
+
 	@RdfProperty(Constants.DC + "subject")
 	private Collection<String> genres;
-	
-	public MusicArtist(String name){
+
+	public MusicArtist() {
+
+	}
+
+	public MusicArtist(String name) {
 		this.name = name;
 		this.genres = new ArrayList<String>();
 	}
@@ -39,11 +42,11 @@ public class MusicArtist extends Thing{
 	public void setGenres(Collection<String> genres) {
 		this.genres = genres;
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return name + " zanrovi:" + genres.toString();
 	}
-	
+
 }

@@ -27,6 +27,7 @@ public class QueryExecutor {
 		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
 			RDFNode value = solution.get(variable);
+			System.out.println(value.isLiteral());
 			if (value.isLiteral())
 				results.add(((Literal) value).getLexicalForm());
 			else

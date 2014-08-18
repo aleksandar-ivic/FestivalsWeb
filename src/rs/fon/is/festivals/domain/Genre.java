@@ -7,10 +7,9 @@ import thewebsemantic.Namespace;
 import thewebsemantic.RdfProperty;
 import thewebsemantic.RdfType;
 
-
 @Namespace(Constants.MO)
 @RdfType("Genre")
-public class Genre extends Thing implements Serializable{
+public class Genre extends Thing implements Serializable {
 
 	/**
 	 * 
@@ -18,8 +17,12 @@ public class Genre extends Thing implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@RdfProperty(Constants.DC + "title")
 	private String title;
-	
-	public Genre(String title){
+
+	public Genre() {
+
+	}
+
+	public Genre(String title) {
 		this.title = title;
 	}
 
@@ -30,12 +33,11 @@ public class Genre extends Thing implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return title;
 	}
-	
-	
+
 }

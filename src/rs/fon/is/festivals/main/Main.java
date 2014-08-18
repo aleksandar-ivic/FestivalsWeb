@@ -15,13 +15,33 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		//ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
-		//Festival festival = FestivalParser.parse(ids.get(0));
-		//DataModelManager.getInstance().save(festival);
-		//System.out.println(festival.getUri());
-		Festival festival = (Festival) DataModelManager.getInstance().load("http://is.fon.rs/rdfFestivals/Festival/7c63efa3-b468-45a1-8043-185b7823ada5");
-		System.out.println(festival.getLocation().getLocationName());
+		ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
+		Festival festival = FestivalParser.parse(ids.get(0));
+		DataModelManager.getInstance().save(festival.getLocation());
+		DataModelManager.getInstance().save(festival.getInterval());
+		for (Genre genre : festival.getGenres()) {
+			DataModelManager.getInstance().save(genre);
+		}
+		for (MusicArtist artist : festival.getLineup()) {
+			DataModelManager.getInstance().save(artist);
+		}
+		DataModelManager.getInstance().save(festival);
+
 		DataModelManager.getInstance().closeDataModel();
+
+	}
+
+	private static void printFestival(Festival festival) {
+		System.out.println(festival.getUri());
+		System.out.println(festival.getLocation().getUri());
+		System.out.println(festival.getInterval().getUri());
+		for (Genre genre : festival.getGenres()) {
+			System.out.println(genre.getUri());
+		}
+		for (MusicArtist artist : festival.getLineup()) {
+			System.out.println(artist.getUri());
+		}
+
 	}
 
 }

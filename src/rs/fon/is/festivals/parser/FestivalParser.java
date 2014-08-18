@@ -52,7 +52,6 @@ public class FestivalParser {
 
 		// getting start and end date
 		Interval interval = parseInterval(event);
-		System.out.println(interval);
 		if (interval != null) {
 			festival.setInterval(interval);
 		}
@@ -87,8 +86,6 @@ public class FestivalParser {
 			MusicArtist musicArtist = new MusicArtist(artistName);
 
 			Collection<Genre> MAgenres = parseGenres(artist);
-			// genres.addAll(MAgenres);
-
 			for (Genre genre : MAgenres) {
 				musicArtist.getGenres().add(genre.getTitle());
 				if (!genres.contains(genre)) {
@@ -145,14 +142,19 @@ public class FestivalParser {
 		try {
 			Venue venue = event.getVenue();
 			String city = venue.getCity();
-			System.out.println(city);
 			double[] latlng = getLatAndLng(city);
 			Location location = new Location(city, latlng[0], latlng[1]);
 			location.setUri(URIGenerator.generate(location));
 			return location;
 		} catch (Exception e2) {
 			e2.printStackTrace();
-			return null;
+			Location location = new Location("Unknown", 0, 0);
+			try {
+				location.setUri(URIGenerator.generate(location));
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			return location;
 		}
 	}
 
@@ -160,6 +162,9 @@ public class FestivalParser {
 		try {
 			Date start = event.getStartDate();
 			Date end = event.getEndDate();
+			if (end == null) {
+				end = start;
+			}
 			Interval interval = new Interval(start, end);
 			interval.setUri(URIGenerator.generate(interval));
 			return interval;

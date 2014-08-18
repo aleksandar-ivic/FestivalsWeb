@@ -43,7 +43,7 @@ public class DataModelManager {
 	}
 	
 	public void save(Object o) {
-		writer.saveDeep(o);
+		writer.save(o);
 	}
 	
 	public Object load(String uri) {

@@ -35,7 +35,8 @@ public class FestivalsRest {
 			}
 			return festivalsArray.toString();
 		}
-		throw new WebApplicationException(Response.Status.NO_CONTENT);
+		return "{}";
+		//throw new WebApplicationException(Response.Status.NO_CONTENT);
 	}
 
 }
