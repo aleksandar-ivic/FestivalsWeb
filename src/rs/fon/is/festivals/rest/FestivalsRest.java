@@ -3,6 +3,7 @@ package rs.fon.is.festivals.rest;
 import java.util.Collection;
 
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.Encoded;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,7 +25,7 @@ public class FestivalsRest {
 	private FestivalServiceImpl festivalsRepository = new FestivalServiceImpl();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json; charset=UTF-8")
 	public String getFestivalsWithGenre(@DefaultValue("") @QueryParam("genre") String genre){
 		Collection<Festival> festivals = festivalsRepository.getFestivals(genre);
 		if (festivals != null && !festivals.isEmpty()) {

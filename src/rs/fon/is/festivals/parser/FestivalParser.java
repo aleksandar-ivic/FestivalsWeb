@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -146,8 +147,8 @@ public class FestivalParser {
 			Location location = new Location(city, latlng[0], latlng[1]);
 			location.setUri(URIGenerator.generate(location));
 			return location;
-		} catch (Exception e2) {
-			e2.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 			Location location = new Location("Unknown", 0, 0);
 			try {
 				location.setUri(URIGenerator.generate(location));
@@ -177,18 +178,19 @@ public class FestivalParser {
 
 	private static double[] getLatAndLng(String city) throws Exception {
 		double[] latlng = new double[2];
-		String url = "http://api.geonames.org/searchJSON?q=" + city
+		System.out.println(city);
+		String url = "http://api.geonames.org/searchJSON?q=" + URLEncoder.encode(city, "utf-8")
 				+ "&maxRows=1&username=" + user;
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		con.setRequestMethod("GET");
+		
 
 		int responseCode = con.getResponseCode();
 		StringBuffer response = new StringBuffer();
 		if (responseCode == 200) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {

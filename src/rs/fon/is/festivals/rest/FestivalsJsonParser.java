@@ -12,6 +12,7 @@ public class FestivalsJsonParser {
 	public static JsonObject serializeFestival(Festival festival) {
 		JsonObject festivalJson = new JsonObject();
 
+
 		festivalJson.addProperty("uri", festival.getUri().toString());
 		festivalJson.addProperty("festivalName", festival.getFestivalName());
 

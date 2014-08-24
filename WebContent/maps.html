@@ -1,106 +1,128 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>FESTIVAL ON MAP</title>
-        <style type="text/css">
-            #map_canvas {
-                width: 800px;
-                height: 600px;
-                float: left;
-            }
-            #combo_div{
-                width: 200px;
-                height: 100px;
-                float: left;
-                background-color: blue;
-            }
-            
-        </style>
-        <script src="http://maps.google.com/maps/api/js?sensor=false" 
-        type="text/javascript"></script> 
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Festivals</title>
+<style type="text/css">
+#map_canvas {
+	width: 800px;
+	height: 600px;
+	float: left;
+}
 
-        <script type="text/javascript">
-            $.getJSON("coordinates.json", initialize);
+#combo_div {
+	width: 500px;
+	height: 300px;
+	float: left;
+	background-color: blue;
+}
 
-            function initialize(json) {
-                var coordinates = new Array();
-                coordinates = json.coordinates;
-                var map_options = {
-                    center: new google.maps.LatLng(coordinates[0].lat, coordinates[0].lng),
-                    zoom: 5,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
+#genres {
+	width: 500px;
+}
 
-                var google_map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+#button {
+	width: 200px;
+	float: left;
+	clear: both;
+	float: left;
+	d
+}
+</style>
+<script src="http://maps.google.com/maps/api/js?sensor=false"
+	type="text/javascript"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="requests.js"></script>
+<script type="text/javascript">
+	function initialize(json) {
+		var coordinates = new Array();
+		coordinates = JSON.parse(json);
+		console.log(coordinates);
+		var map_options = {
+			center : new google.maps.LatLng(50.086161,
+					14.411519999999996),
+			zoom : 3,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
 
-                var info_window = new google.maps.InfoWindow({
-                    content: 'loading'
-                });
+		var google_map = new google.maps.Map(document
+				.getElementById("map_canvas"), map_options);
 
+		var info_window = new google.maps.InfoWindow({
+			content : 'loading'
+		});
 
-                var t = [];
-                var x = [];
-                var y = [];
-                var h = [];
+		var t = [];
+		var x = [];
+		var y = [];
+		var h = [];
 
-                for (var j = 0; j < coordinates.length; j++) {
+		for (var j = 0; j < coordinates.length; j++) {
+			t.push(coordinates[j].location.locationName);
+			x.push(coordinates[j].location.lat);
+			y.push(coordinates[j].location.lng);
+			h.push('<p><strong>Location Name 1</strong><br/>Address 1</p>');
 
-                    console.log(j);
-                    t.push(coordinates[j].city);
-                    x.push(coordinates[j].lat);
-                    y.push(coordinates[j].lng);
-                    h.push('<p><strong>Location Name 1</strong><br/>Address 1</p>');
+		}
+		var i = 0;
+		for (item in t) {
+			var m = new google.maps.Marker({
+				map : google_map,
+				animation : google.maps.Animation.DROP,
+				title : t[i],
+				position : new google.maps.LatLng(x[i], y[i]),
+				html : h[i]
+			});
 
-                }
-                console.log(t);
-                var i = 0;
-                for (item in t) {
-                    var m = new google.maps.Marker({
-                        map: google_map,
-                        animation: google.maps.Animation.DROP,
-                        title: t[i],
-                        position: new google.maps.LatLng(x[i], y[i]),
-                        html: h[i]
-                    });
+			google.maps.event.addListener(m, 'click', function() {
+				info_window.setContent(this.html);
+				info_window.open(google_map, this);
+			});
+			i++;
+		}
+	}
+</script>
+<script type="text/javascript">
+	function getDataGenre() {
+		var json = getData("genres");
+		addItem(json);
+	}
+</script>
+<script type="text/javascript">
+	function addItem(json) {
+		var genres = new Array();
+		var genresStringify = JSON.stringify(json);
+		var genres = JSON.parse(genresStringify);
+		var select = document.getElementById("genres");
+		for (var i = 0; i < genres.length; i++) {
+			var option = document.createElement('option');
+			option.text = option.value = genres[i].title + "["
+					+ genres[i].numOfFestWithGenre + "]";
+			select.add(option, 0);
+		}
 
-                    google.maps.event.addListener(m, 'click', function() {
-                        info_window.setContent(this.html);
-                        info_window.open(google_map, this);
-                        // send GET to server for chosen festival
-                    });
-                    i++;
-                }
-            }
-        </script>
-        <script type="text/javascript">
-            var myOptions = [];
-            $.getJSON("genres.json", addItem);
-            function addItem(json)
-            {
-                var genres = new Array();
-                genres = json[0].genres;
-
-                for (var i = 0; i < genres.length; i++) {
-                    var genre = new Object;
-                    genre = genres[i].genre;
-                    console.log(genre);
-                    myOptions.push(genre);
-                    console.log(myOptions);
-                }
-                $.each(myOptions, function(i, el)
-                {
-                    $('#genres').append(new Option(el));
-                });
-
-
-            }
-        </script>
-    </head>
-    <body>
-        <div id="container">
-            <div id="map_canvas"></div>
-                <div id="combo_div"><select id="genres"/></div>            
-        </div>
-    </body>
+	}
+</script>
+<script type="text/javascript">
+	function getFestivalsWithGenre() {
+		var selectObj = document.getElementById("genres");
+		var selectIndex = selectObj.selectedIndex;
+		var selectValue = selectObj.options[selectIndex].text;
+		selectValue = selectValue.substring(0, selectValue.indexOf('['));
+		var json = getData("festivals?genre=" + selectValue);
+		initialize(JSON.stringify(json));
+	}
+</script>
+</head>
+<body onLoad="getDataGenre()">
+	<div id="container">
+		<div id="map_canvas"></div>
+		<div id="combo_div">
+			<select id="genres"></select>
+			<button id="button" type="button" onClick='getFestivalsWithGenre()'>Prikazi
+				festivale</button>
+		</div>
+	</div>
+</body>
 </html>
