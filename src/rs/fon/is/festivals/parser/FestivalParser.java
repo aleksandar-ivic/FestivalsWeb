@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,6 +26,7 @@ import rs.fon.is.festivals.domain.Genre;
 import rs.fon.is.festivals.domain.Interval;
 import rs.fon.is.festivals.domain.Location;
 import rs.fon.is.festivals.domain.MusicArtist;
+import rs.fon.is.festivals.persistence.DataModelManager;
 import rs.fon.is.festivals.util.URIGenerator;
 import rs.fon.is.festivals.util.Util;
 import rs.fon.is.festivals.util.XMLParser;
@@ -33,7 +36,7 @@ public class FestivalParser {
 	private static String key = "26440e0193813621bf98c49ab9fd67cc";
 	private static String user = "thecoa4";
 	private static String URL = "http://ws.audioscrobbler.com/2.0/?method=geo.getEvents&location=Europe&distance=100&festivalsonly=1&api_key=26440e0193813621bf98c49ab9fd67cc&page=";
-	private static Collection<Genre> genres = new ArrayList<>();
+	private static LinkedHashSet<Genre> genres = new LinkedHashSet<>();
 
 	public static ArrayList<String> getAllFestivalsIDs() {
 		ArrayList<String> ids = new ArrayList<>();
@@ -73,6 +76,7 @@ public class FestivalParser {
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 
 		// System.out.println(genres);
@@ -87,11 +91,9 @@ public class FestivalParser {
 			MusicArtist musicArtist = new MusicArtist(artistName);
 
 			Collection<Genre> MAgenres = parseGenres(artist);
+			genres.addAll(MAgenres);
 			for (Genre genre : MAgenres) {
 				musicArtist.getGenres().add(genre.getTitle());
-				if (!genres.contains(genre)) {
-					genres.add(genre);
-				}
 			}
 			try {
 				musicArtist.setUri(URIGenerator.generate(musicArtist));
@@ -100,6 +102,7 @@ public class FestivalParser {
 				return new ArrayList<>();
 			}
 			lineup.add(musicArtist);
+
 		}
 		return lineup;
 	}
@@ -113,27 +116,23 @@ public class FestivalParser {
 			try {
 				Genre g = Util.seeIfGenreExists(genre);
 				if (g == null) {
+					genre.setUri(URIGenerator.generate(genre));
+					System.out.println(genre.getUri());
+					DataModelManager.getInstance().save(genre);
+					mapOfGenres.put(tag, genre);
 					try {
-						genre.setUri(URIGenerator.generate(genre));
-						mapOfGenres.put(tag, genre);
-						try {
-							Util.saveMap(mapOfGenres);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} catch (URISyntaxException e) {
+						Util.saveMap(mapOfGenres);
+					} catch (Exception e) {
 						e.printStackTrace();
-						return new ArrayList<>();
 					}
 				} else {
 					genre = g;
-					genre.setUri(URIGenerator.generate(genre));
 				}
 			} catch (Exception e1) {
-				new ArrayList<>();
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
 			genres.add(genre);
 		}
 		return genres;
@@ -178,19 +177,19 @@ public class FestivalParser {
 
 	private static double[] getLatAndLng(String city) throws Exception {
 		double[] latlng = new double[2];
-		System.out.println(city);
-		String url = "http://api.geonames.org/searchJSON?q=" + URLEncoder.encode(city, "utf-8")
-				+ "&maxRows=1&username=" + user;
+		String url = "http://api.geonames.org/searchJSON?q="
+				+ URLEncoder.encode(city, "utf-8") + "&maxRows=1&username="
+				+ user;
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		con.setRequestMethod("GET");
-		
 
 		int responseCode = con.getResponseCode();
 		StringBuffer response = new StringBuffer();
 		if (responseCode == 200) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream(), "UTF-8"));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {

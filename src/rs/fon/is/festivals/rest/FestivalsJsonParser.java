@@ -26,7 +26,7 @@ public class FestivalsJsonParser {
 			}
 			if (festival.getInterval().getEnd() != null) {
 				intervalJson.addProperty("end", festival.getInterval()
-						.getStart().toString());
+						.getEnd().toString());
 			} else {
 				intervalJson.addProperty("end", "");
 			}

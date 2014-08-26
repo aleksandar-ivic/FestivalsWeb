@@ -72,42 +72,5 @@ public class Util {
 		}
 		return null;
 	}
-	/*
-	public static void writeGenresToJson(){
-		JSONArray jsonArray = new JSONArray();
-		JsonObject jsonObject = new JsonObject();
-		HashMap<String, Genre> mapOfGenres = loadMap();
-		for (String genre: mapOfGenres.keySet()) {
-			jsonObject.addProperty("genre", value);
-		}
-
-		System.out.println(newJson);
-		FileWriter file = null;
-		try {
-			
-
-			file = new FileWriter(
-					"C:\\Bitnami\\wampstack-5.4.28-0\\apache2\\htdocs\\genres.json");
-
-			file.write(json.toString());
-
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				//file.flush();
-				file.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
-	}*/
-
 
 }

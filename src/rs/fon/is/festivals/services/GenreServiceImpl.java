@@ -45,7 +45,7 @@ public class GenreServiceImpl implements GenreService{
 				int numOfFestsWithGenre = fsi.getNumberOfFestivalsWithGenre(genre.getTitle());
 				genresMap.put(genre, numOfFestsWithGenre);
 			}	
-		
+			System.out.println(genresMap.size());
 			return genresMap;
 		}
 		return null;

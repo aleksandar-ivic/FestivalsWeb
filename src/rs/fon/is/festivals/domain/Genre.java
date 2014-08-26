@@ -11,10 +11,6 @@ import thewebsemantic.RdfType;
 @RdfType("Genre")
 public class Genre extends Thing implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static long serialVersionUID = 1L;
 
 	@RdfProperty(Constants.DC + "title")
 	private String title;
