@@ -27,6 +27,7 @@ import rs.fon.is.festivals.domain.Interval;
 import rs.fon.is.festivals.domain.Location;
 import rs.fon.is.festivals.domain.MusicArtist;
 import rs.fon.is.festivals.persistence.DataModelManager;
+import rs.fon.is.festivals.util.LineupWithGenres;
 import rs.fon.is.festivals.util.URIGenerator;
 import rs.fon.is.festivals.util.Util;
 import rs.fon.is.festivals.util.XMLParser;
@@ -36,7 +37,6 @@ public class FestivalParser {
 	private static String key = "26440e0193813621bf98c49ab9fd67cc";
 	private static String user = "thecoa4";
 	private static String URL = "http://ws.audioscrobbler.com/2.0/?method=geo.getEvents&location=Europe&distance=100&festivalsonly=1&api_key=26440e0193813621bf98c49ab9fd67cc&page=";
-	private static LinkedHashSet<Genre> genres = new LinkedHashSet<>();
 
 	public static ArrayList<String> getAllFestivalsIDs() {
 		ArrayList<String> ids = new ArrayList<>();
@@ -67,31 +67,30 @@ public class FestivalParser {
 		}
 
 		// getting lineup and genres
-		Collection<MusicArtist> lineup = parseArtists(event);
-		festival.setLineup(lineup);
-		festival.setGenres(genres);
+		LineupWithGenres lineupWithGenres = parseArtists(event);
+		festival.setLineup(lineupWithGenres.getArtists());
+		festival.setGenres(lineupWithGenres.getGenres());
 
 		try {
 			festival.setUri(URIGenerator.generate(festival));
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-
-		// System.out.println(genres);
 		return festival;
 	}
 
-	private static Collection<MusicArtist> parseArtists(Event event) {
+	private static LineupWithGenres parseArtists(Event event) {
+		LineupWithGenres lineupWithGenres = new LineupWithGenres();
 		Collection<MusicArtist> lineup = new ArrayList<>();
+		Collection<Genre> genresSet = new LinkedHashSet<>();
 		Collection<String> artists = event.getArtists();
 		for (String artistName : artists) {
 			Artist artist = Artist.getInfo(artistName, key);
 			MusicArtist musicArtist = new MusicArtist(artistName);
 
 			Collection<Genre> MAgenres = parseGenres(artist);
-			genres.addAll(MAgenres);
+			genresSet.addAll(MAgenres);
 			for (Genre genre : MAgenres) {
 				musicArtist.getGenres().add(genre.getTitle());
 			}
@@ -99,12 +98,13 @@ public class FestivalParser {
 				musicArtist.setUri(URIGenerator.generate(musicArtist));
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
-				return new ArrayList<>();
+				//return new LineupWithGenres();
 			}
 			lineup.add(musicArtist);
-
+			lineupWithGenres.setArtists(lineup);
+			lineupWithGenres.setGenres(genresSet);
 		}
-		return lineup;
+		return lineupWithGenres;
 	}
 
 	private static Collection<Genre> parseGenres(Artist artist) {
@@ -117,7 +117,7 @@ public class FestivalParser {
 				Genre g = Util.seeIfGenreExists(genre);
 				if (g == null) {
 					genre.setUri(URIGenerator.generate(genre));
-					System.out.println(genre.getUri());
+					//System.out.println("Genre ne postoji:  " + genre.getUri());
 					DataModelManager.getInstance().save(genre);
 					mapOfGenres.put(tag, genre);
 					try {
@@ -127,6 +127,10 @@ public class FestivalParser {
 					}
 				} else {
 					genre = g;
+					//System.out.println("Postoji zanr: "  + g.getUri());
+					genre.setUri(g.getUri());
+					//System.out.println("Genre " + genre.getUri());
+					DataModelManager.getInstance().save(genre);
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

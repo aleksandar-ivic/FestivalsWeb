@@ -1,11 +1,12 @@
 package rs.fon.is.festivals.domain;
 
+import java.io.Serializable;
 import java.net.URI;
 
 import thewebsemantic.Id;
 
 
-public class Thing {
+public class Thing implements Serializable{
 
 	@Id
 	private URI uri;

@@ -21,21 +21,25 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 		ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
-		HashMap<String, Genre> mapOfGenres = Util.loadMap();
-		for (int i = 1; i < 11; i++) {
+		for (int i = 0; i < 20; i++) {
 			Festival festival = FestivalParser.parse(ids.get(i));
+			//System.out.println(festival.getUri());
 			DataModelManager.getInstance().save(festival);
 			DataModelManager.getInstance().save(festival.getLocation());
-			System.out.println(festival.getLocation().getUri());
+			//System.out.println(festival.getLocation().getUri());
 			DataModelManager.getInstance().save(festival.getInterval());
-			System.out.println(festival.getInterval().getUri());
+			//System.out.println(festival.getInterval().getUri());
 			for (MusicArtist artist : festival.getLineup()) {
 				DataModelManager.getInstance().save(artist);
-				System.out.println(artist.getUri());
+				//System.out.println(artist.getUri());
 			}
 		}
 
 		DataModelManager.getInstance().closeDataModel();
+		/*HashMap<String, Genre> mapOfGenres = Util.loadMap();
+		for (Genre genre : mapOfGenres.values()) {
+			System.out.println(genre.getUri());
+		}*/
 	}
 
 }

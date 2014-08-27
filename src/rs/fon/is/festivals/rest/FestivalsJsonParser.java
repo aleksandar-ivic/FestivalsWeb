@@ -57,6 +57,8 @@ public class FestivalsJsonParser {
 						genresArray.add(genreJson);
 					}
 					artistJson.add("genres", genresArray);					
+				}else{
+					artistJson.add("genres", new JsonArray());
 				}
 				artistsArray.add(artistJson);
 			}
