@@ -36,3 +36,16 @@ Class Genre contains name of genre.
 3. The solution
 ===============
 
+This application collects metadata about movies from the webpage [last.fm](http://www.last.fm/). The data is extracted by the last.fm API and is used to create domain objects of the application that are persisted into an RDF repository. The application allows access to that data via RESTful services.
+
+The applications contains two REST services.
+
+**GET /api/festivals** - returns data about festival. Service's parameter is:
+ - genre - specifies the genre of returned festivals
+</br>An example of this service call:
+  *GET/ festivals?genre=rock*
+
+**GET /api/genres** - returns data about all genres. It has no parameters.
+
+An example of this service call:
+  *GET/genres*
