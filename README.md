@@ -17,4 +17,3 @@ Application workflow consists of the following phases
 
 2. Domain model
 ===============
-![domain_model](
