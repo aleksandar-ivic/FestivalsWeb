@@ -42,7 +42,8 @@ The applications contains two REST services.
 
 **GET /api/festivals** - returns data about festival. Service's parameter is:
  - genre - specifies the genre of returned festivals
-</br>An example of this service call:
+  
+An example of this service call:
   *GET/ festivals?genre=rock*
 
 **GET /api/genres** - returns data about all genres. It has no parameters.
