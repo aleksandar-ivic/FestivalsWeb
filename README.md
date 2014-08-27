@@ -20,6 +20,7 @@ Application workflow consists of the following phases
 Webpages of festivals from the [last.fm](http://www.last.fm/) website are analyzed in order to determine which classes and properties form the DC, MO, FOAF, GEO, TL, EVENT and TIME vocabularies are supported. Based on that analysis, domain model is created and it is depicted in Picture 1.
 
 ![domain](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/domain_model.png)
+
 Picture 1 - Domain model
 
 Class Festival contains basic information about festival such as festival name and it has references to its lineup (class MusicArtist), its location (class Location), its genres (class Genre) and the date of festival (class Interval).
