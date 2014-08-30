@@ -86,14 +86,14 @@ Picture 2. Run project as Java console application.
 Picture 3. Let's rock!
   
 **Step 3**: Choose genre or choose start date of the festival to mark festivals on the map (Picture 4.)
-[step3](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step3.png)  
+![step3](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step3.png)  
 Picture 4. Choose genre or date to mark festivals on the map.
 
 
 **Step 4**: When you have found the festival you like, click on the marker to get information about that festival (Picture 5. and Picture 6.)
-[step4](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step4.png)  
+![step4](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step4.png)  
 Picture 5. Click on the marker to get information about the chosen festival.
-[step5](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step5.png)
+![step5](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step5.png)
 Picture 6. Example of information about one festival.
 
 6. Acknowledgements
