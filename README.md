@@ -57,7 +57,7 @@ An example of this service call:
 An example of this service call:
   *GET/genres*
   
-This services are used to show data about festivals and mark those festivals on the map.
+GET request to one of these two service triggers the [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) query and the application returns JSON with query results. This services are used to show data about festivals and mark those festivals on the map.
 
 4. Technical realisation
 ========================
