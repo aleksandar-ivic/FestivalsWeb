@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="Aleksandar Ivic">
+
+<title>Festivals</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/stylish-portfolio.css" rel="stylesheet">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery-ui.theme.css">
+
+
+<!-- Custom Fonts -->
+<link href="font-awesome-4.1.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+	rel="stylesheet" type="text/css">
+
+<!-- My style -->
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body onload="getDataGenre()">
+    
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top">Festivals</a>
+            </li>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#genreList">Choose criteria</a>
+            </li>
+            <li>
+                <a href="#map">Map</a>
+            </li>
+        </ul>
+    </nav>
+    
+	<!-- Header -->
+	<header id="top" class="header">
+		<div class="text-vertical-center">
+			<h1>Welcome</h1>
+			<h3>If you love music, if you love festivals</h3>
+			<br> <a href="#genreList" class="btn btn-dark btn-lg">Let's
+				rock!</a>
+		</div>
+	</header>
+
+	<!-- GenreList -->
+	<section id="genreList" class="genreList">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<h2>Choose genre to show festivals:</h2>
+					<span id="genres"></span>
+				</div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container -->
+	</section>
+
+	<!-- Genres -->
+	<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+	<section id="datePicker" class="services bg-primary">
+		<div class="container" id="datePicker">
+			<h2 id="datePickerH2">Or choose date: <input type="text" id="datepicker"><a href="#map" class="btn btn-dark btn-lg" id="showMe" onclick="getFestivalsWithDate()">Show me!</a></h2>
+		</div>
+
+	</section>
+
+	<!-- MapOfFests-->
+	<aside class="mapOfFests">
+		<div class="text-vertical-center" id="map">
+		
+			<h2 id="mapH2">Festivals on map:</h2>
+            <div id="map-canvas" ></div>
+        </section>
+		</div>
+	</aside>
+
+	<!-- FestInfo -->
+	<section id="festInfo" class="festInfo">
+		<div class="container" id="artists">
+			<h2 id="lineup"></h2>
+			
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 col-lg-offset-1 text-center">
+					<hr class="small">
+					<p class="text-muted">Copyright &copy; Aleksandar Ivic</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- jQuery Version 1.11.0 -->
+	<script src="js/jquery-1.11.0.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+
+	<script src="http://maps.google.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/requests.js"></script>
+	<script type="text/javascript" src="js/getData.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script>
+            // Closes the sidebar menu
+            $("#menu-close").click(function(e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("active");
+            });
+
+            // Opens the sidebar menu
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("active");
+            });
+
+            // Scrolls to the selected menu item on the page
+            $(function() {
+                $('a[href*=#]:not([href=#])').click(function() {
+                    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                        if (target.length) {
+                            $('html,body').animate({
+                                scrollTop: target.offset().top
+                            }, 1000);
+                            return false;
+                        }
+                    }
+                });
+            });
+        </script>
+	<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+
+</body>
+
+</html>

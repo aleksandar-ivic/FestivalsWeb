@@ -1,0 +1,52 @@
+h3{
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px gray;
+}
+h4{
+	color: black;
+}
+p{
+	color: black;	
+}
+#map-canvas{
+	positon: relative;
+	width:70%;
+    height:80%;
+    scrolling:no;
+    margin: 0 auto;
+    padding-top: 50px;
+}	
+#datepicker{
+	margin-top: 75px;
+}
+#datePickerH2{
+	margin-top: 75px;
+	margin-left: 160px;
+}
+
+#showMe{
+	margin-left: 50px;
+}
+
+#datepicker{
+	color: #424342;
+}
+
+#mapH2{
+	color: #424342;
+	margin-bottom: 15px;
+}
+
+#lineup{
+	color: white;
+}
+
+#artists{
+	height: auto;
+	margin-left: 20px;
+	
+}
+
+#festName{
+	color: white;
+}
