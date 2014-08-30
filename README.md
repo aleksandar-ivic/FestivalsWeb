@@ -44,8 +44,10 @@ The applications contains two REST services.
  - genre - specifies the genre of returned festivals
  - date - specifies the start date of festival
   
-An example of this service call:
-  *GET/ festivals?genre=rock*
+An example of this service call:  
+
+  *GET/ festivals?genre=rock*  
+  
   *GET/ festivals?genre=&date=08/30/2014*
 
 **GET /api/genres** - returns data about all genres. It has no parameters.
