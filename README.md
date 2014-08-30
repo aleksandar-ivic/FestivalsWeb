@@ -75,6 +75,9 @@ Implementation of the RESTful web service is supported by [Jersey](https://jerse
 5. Example of use
 =================
 
+-**Step 1**: To collect data about festivals, run project as Java console application. (Picture 2.)
+-**Step 2**: Go to *yourServerUrl/index.html and click "Let's rock!" (Picture 3.)
+
 6. Acknowledgements
 ===================
 
