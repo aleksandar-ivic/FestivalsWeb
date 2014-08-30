@@ -9,7 +9,7 @@ The main idea of this application is to get data about music festivals in Europe
 Application workflow has 5 phases:
 
 1. XML parser get's festival IDs from web service [AudioScrobbler WebService](http://www.audioscrobbler.net/).
-2. For each festival ID [last.fm API](http://www.last.fm/api) get's data about festival, it's location, interval and lineup.
+2. For each festival ID [last.fm API](http://www.last.fm/api) gets data about festival, it's location, interval and lineup.
 3. That data is transformed into RDF triplets based on [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#), [The Event Ontology](http://purl.org/NET/c4dm/event.owl#) and [Time Ontology](http://www.w3.org/2006/time#) vocabularies.
 4. Data is persisted into an RDF repository
 5. Access to the data is enabled through RESTful services
@@ -17,7 +17,7 @@ Application workflow has 5 phases:
 
 2. Domain model
 ===============
-Webpages of festivals from the [last.fm](http://www.last.fm/) website are analyzed in order to determine which classes and properties form the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline](http://purl.org/NET/c4dm/timeline.owl#), [EVENT](http://purl.org/NET/c4dm/event.owl#) and [TIME](http://www.w3.org/2006/time#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
+Data about festivals from the [last.fm](http://www.last.fm/) website are analyzed in order to determine which classes and properties from the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline](http://purl.org/NET/c4dm/timeline.owl#), [EVENT](http://purl.org/NET/c4dm/event.owl#) and [TIME](http://www.w3.org/2006/time#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
 
 ![domain](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/domain_model.png)
 
