@@ -38,7 +38,7 @@ Class Genre contains name of genre.
 
 First of all, a few words about [last.fm](http://www.last.fm/). [Last.fm](http://www.last.fm/) is a music recommendation service. You use [Last.fm](http://www.last.fm/) by [signing up](https://secure.last.fm/join) and downloading [The Scrobbler](http://www.last.fm/download), which helps you discover more music based on the songs you play. [Last.fm](http://www.last.fm/) has its own [API](http://www.last.fm/api) for collecting data.
 
-This application collects data about festivals from the [last.fm](http://www.last.fm/). The data is collected by the [last.fm API](http://www.last.fm/api). But, before using services of [last.fm API](http://www.last.fm/api), XML Parser collects id of the festivals in Europe from [AudioScrobbler WebService](http://www.audioscrobbler.net/). Than those IDs are passed as parameters to [last.fm API](http://www.last.fm/api), which returns a festival. Data about festival is used to create domain objects of the application that are persisted into an RDF repository The application allows access to that data via RESTful services.
+This application collects data about festivals from the [last.fm](http://www.last.fm/). The data is collected by the [last.fm API](http://www.last.fm/api). But, before using services of [last.fm API](http://www.last.fm/api), XML Parser collects IDs of the festivals in Europe from [AudioScrobbler WebService](http://www.audioscrobbler.net/). Than those IDs are passed as parameters to [last.fm API](http://www.last.fm/api), which returns a festival. Data about festival is used to create domain objects based on [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline](http://purl.org/NET/c4dm/timeline.owl#), [EVENT](http://purl.org/NET/c4dm/event.owl#) and [TIME](http://www.w3.org/2006/time#) vocabularies of the application that are persisted into an RDF repository. The application allows access to that data via RESTful services.
 
 The applications contains two REST services.
 
@@ -56,6 +56,8 @@ An example of this service call:
 
 An example of this service call:
   *GET/genres*
+  
+This services are used to show data about festivals and mark those festivals on the map.
 
 4. Technical realisation
 ========================
@@ -70,8 +72,10 @@ Application uses [Jenabean](https://code.google.com/p/jenabean/) library for map
 
 Implementation of the RESTful web service is supported by [Jersey](https://jersey.java.net/) framework. Jersey is the open source JAX-RS Reference Implementation for building RESTful Web services. It uses annotations which define type of the HTTP requests (GET, POST ...) and also the path to the requested resource.
 
+5. Example of use
+=================
 
-5. Acknowledgements
+6. Acknowledgements
 ===================
 
 This application has been developed as a part of the project assignment for the subject [Intelligent Systems](http://is.fon.rs/) at the Faculty of Organization Sciences, University of Belgrade, Serbia.
