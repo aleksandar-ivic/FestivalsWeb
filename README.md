@@ -74,9 +74,16 @@ Implementation of the RESTful web service is supported by [Jersey](https://jerse
 
 5. Example of use
 =================
+  
+To use this application you have to do the following steps:
 
--**Step 1**: To collect data about festivals, run project as Java console application. (Picture 2.)
--**Step 2**: Go to *yourServerUrl/index.html and click "Let's rock!" (Picture 3.)
+**Step 1**: To collect data about festivals, run project as Java console application. (Picture 2.)  
+
+**Step 2**: Go to *yourServerUrl/index.html* and click "Let's rock!" (Picture 3.)  
+  
+**Step 3**: Choose genre or choose start date of the festival to mark festivals on the map (Picture 4. and Picture 5.)
+
+**Step 4**: When you have found the festival you like, click on the marker to get information about that festival (Picture 6.)
 
 6. Acknowledgements
 ===================
