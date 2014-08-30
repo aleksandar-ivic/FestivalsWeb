@@ -36,7 +36,9 @@ Class Genre contains name of genre.
 3. The solution
 ===============
 
-This application collects metadata about movies from the webpage [last.fm](http://www.last.fm/). The data is extracted by the last.fm API and is used to create domain objects of the application that are persisted into an RDF repository. The application allows access to that data via RESTful services.
+First of all, a few words about [last.fm](http://www.last.fm/). [Last.fm](http://www.last.fm/) is a music recommendation service. You use [Last.fm](http://www.last.fm/) by [signing up](https://secure.last.fm/join) and downloading [The Scrobbler](http://www.last.fm/download), which helps you discover more music based on the songs you play. [Last.fm](http://www.last.fm/) has its own [API](http://www.last.fm/api) for collecting data.
+
+This application collects data about festivals from the [last.fm](http://www.last.fm/). The data is collected by the [last.fm API](http://www.last.fm/api). But, before using services of [last.fm API](http://www.last.fm/api), XML Parser collects id of the festivals in Europe from [AudioScrobbler WebService](http://www.audioscrobbler.net/). Than those IDs are passed as parameters to [last.fm API](http://www.last.fm/api), which returns a festival. Data about festival is used to create domain objects of the application that are persisted into an RDF repository The application allows access to that data via RESTful services.
 
 The applications contains two REST services.
 
@@ -46,7 +48,7 @@ The applications contains two REST services.
   
 An example of this service call:  
 
-  *GET/ festivals?genre=rock*  
+  *GET/ festivals?genre=rock&date=*  
   
   *GET/ festivals?genre=&date=08/30/2014*
 
