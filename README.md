@@ -4,7 +4,7 @@ Festivals
 1. About the project
 ===================
 
-The main idea of this application is to get data about music festivals in Europe from [last.fm](http://www.last.fm/) and then show that data on map. The data is collected using [last.fm API](http://www.last.fm/api) to find festivals by its ID, which is provided by web service [AudioScrobbler WebService](http://www.audioscrobbler.net/). After the data is collected, it is transformed to RDF format and stored into RDF repository. Access to the collected data is enabled through RESTful services.
+The main idea of this application is to get data about music festivals in Europe from [last.fm](http://www.last.fm/) and then show that data on map. The data is collected using [last.fm API](http://www.last.fm/api) to find festivals by its ID, which are provided by web service [AudioScrobbler WebService](http://www.audioscrobbler.net/). After the data is collected, it is transformed to RDF format and stored into RDF repository. Access to the collected data is enabled through RESTful services.
 
 Application workflow has 5 phases:
 
@@ -17,7 +17,7 @@ Application workflow has 5 phases:
 
 2. Domain model
 ===============
-Webpages of festivals from the [last.fm](http://www.last.fm/) website are analyzed in order to determine which classes and properties form the DC, MO, FOAF, GEO, TL, EVENT and TIME vocabularies are supported. Based on that analysis, domain model is created and it is depicted in Picture 1.
+Webpages of festivals from the [last.fm](http://www.last.fm/) website are analyzed in order to determine which classes and properties form the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline](http://purl.org/NET/c4dm/timeline.owl#), [EVENT](http://purl.org/NET/c4dm/event.owl#) and [TIME](http://www.w3.org/2006/time#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
 
 ![domain](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/domain_model.png)
 
@@ -42,9 +42,11 @@ The applications contains two REST services.
 
 **GET /api/festivals** - returns data about festival. Service's parameter is:
  - genre - specifies the genre of returned festivals
+ - date - specifies the start date of festival
   
 An example of this service call:
   *GET/ festivals?genre=rock*
+  *GET/ festivals?genre=&date=08/30/2014*
 
 **GET /api/genres** - returns data about all genres. It has no parameters.
 
