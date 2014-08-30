@@ -164,12 +164,30 @@ public class FestivalParser {
 
 	private static Interval parseInterval(Event event) {
 		try {
-			Date start = event.getStartDate();
-			Date end = event.getEndDate();
-			if (end == null) {
-				end = start;
+			Interval interval = new Interval();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+			sdf.setLenient(false);
+			Date start = event.getStartDate();			
+			try {
+				String startFormat = sdf.format(start);
+				System.out.println(start.toString());
+				start = null;
+				start = sdf.parse(startFormat);
+				System.out.println(sdf.parse(startFormat));
+				interval.setStart(start);
+				Date end = event.getEndDate();
+				if (end == null) {
+					end = start;
+				}else{
+					end = sdf.parse(sdf.format(end));
+				}
+				interval.setEnd(end);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			Interval interval = new Interval(start, end);
+			
+			System.out.println(interval);
 			interval.setUri(URIGenerator.generate(interval));
 			return interval;
 		} catch (URISyntaxException e1) {

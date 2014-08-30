@@ -17,35 +17,54 @@ public class FestivalServiceImpl implements FestivalService {
 	}
 
 	@Override
-	public Collection<Festival> getFestivals(String genre) {
+	public Collection<Festival> getFestivals(String genre, String date) {
 		StringBuffer query = new StringBuffer();
 		// prefix part
 		query.append("PREFIX dc:<" + Constants.DC + ">");
 		query.append("PREFIX mo:<" + Constants.MO + "> \n");
 		query.append("PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
 		query.append("PREFIX ns:<" + Constants.NS + "> \n");
+		query.append("PREFIX event:<" + Constants.EVENT + "> \n");
+		query.append("PREFIX tl:<" + Constants.TL + "> \n");
+		query.append("PREFIX xsd:<" + Constants.XSD + "> \n");
 		// select part
 		query.append("SELECT DISTINCT ?festival \n");
 
 		// where
 		query.append("WHERE\n{\n");
-		query.append(" \t?festival rdf:type mo:Festival;\n");
+		
 
-		query.append("	\tmo:genre ?genre .\n");
-		query.append("\t?genre a mo:Genre ;\n");
-		query.append("	\tdc:title ?genreName .\n");
-		query.append("\tFILTER regex(?genreName,\"" + genre + "\")\n");
+		
+		if (!genre.equals("")) {
+			query.append(" \t?festival rdf:type mo:Festival;\n");
+			query.append("	\tmo:genre ?genre .\n");
+			query.append("\t?genre a mo:Genre ;\n");
+			query.append("	\tdc:title ?genreName .\n");
+			query.append("\tFILTER regex(?genreName,\"" + genre + "\")\n");
+			query.append("}");
+		}
+		if (!date.equals("")) {
+			query.append(" \t?festival rdf:type mo:Festival;\n");
+			query.append("\tevent:time ?interval .\n");
+			query.append("\t?interval a tl:Interval ;\n");
+			query.append("	\ttl:end ?start .\n");
+			String[] splitedDate = date.split("/");
+			String tdbDate = splitedDate[2]+"-"+splitedDate[0]+"-"+splitedDate[1]+"T22:00:00Z";
+			query.append("\tFILTER(?start >= \"" + tdbDate + "\"^^xsd:dateTime)\n");
+			query.append("}");
+			System.out.println(query);
+		}
 
-		query.append("}");
+		
 		QueryExecutor queryExecutor = new QueryExecutor();
 		Collection<String> queryResults = queryExecutor
 				.executeOneVariableSelectSparqlQuery(query.toString(),
 						"festival", DataModelManager.getInstance().getModel());
 		Collection<Festival> festivals = new ArrayList<>();
+		System.out.println(queryResults.size());
 		if (queryResults != null && !queryResults.isEmpty()) {
 			for (String uri : queryResults) {
 				Festival f = getFestival(uri);
-				System.out.println(f.getFestivalName());
 				festivals.add(f);
 			}
 
@@ -90,6 +109,37 @@ public class FestivalServiceImpl implements FestivalService {
 
 		}
 		return -1;
+	}
+
+	@Override
+	public Collection<Festival> getAllFestivals() {
+		StringBuffer query = new StringBuffer();
+		// prefix part
+		query.append("PREFIX dc:<" + Constants.DC + ">");
+		query.append("PREFIX mo:<" + Constants.MO + "> \n");
+		query.append("PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
+		query.append("PREFIX ns:<" + Constants.NS + "> \n");
+		// select part
+		query.append("SELECT DISTINCT ?festival \n");
+
+		// where
+		query.append("WHERE\n{\n");
+		query.append(" \t?genre rdf:type mo:Festival.\n");
+		query.append("}");
+		QueryExecutor queryExecutor = new QueryExecutor();
+		Collection<String> queryResults = queryExecutor
+				.executeOneVariableSelectSparqlQuery(query.toString(),
+						"festival", DataModelManager.getInstance().getModel());
+		Collection<Festival> festivals = new ArrayList<>();
+		if (queryResults != null && !queryResults.isEmpty()) {
+			for (String uri : queryResults) {
+				Festival f = getFestival(uri);
+				festivals.add(f);
+			}
+
+			return festivals;
+		}
+		return null;
 	}
 
 }

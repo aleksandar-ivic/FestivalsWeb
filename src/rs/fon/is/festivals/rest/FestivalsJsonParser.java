@@ -1,5 +1,7 @@
 package rs.fon.is.festivals.rest;
 
+import java.text.SimpleDateFormat;
+
 import rs.fon.is.festivals.domain.Festival;
 import rs.fon.is.festivals.domain.Genre;
 import rs.fon.is.festivals.domain.MusicArtist;
@@ -17,16 +19,17 @@ public class FestivalsJsonParser {
 		festivalJson.addProperty("festivalName", festival.getFestivalName());
 
 		JsonObject intervalJson = new JsonObject();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		if (festival.getInterval() != null) {
 			if (festival.getInterval().getStart() != null) {
-				intervalJson.addProperty("start", festival.getInterval()
-						.getStart().toString());
+				intervalJson.addProperty("start", sdf.format(festival.getInterval()
+						.getStart()));
 			} else {
 				intervalJson.addProperty("start", "");
 			}
 			if (festival.getInterval().getEnd() != null) {
-				intervalJson.addProperty("end", festival.getInterval()
-						.getEnd().toString());
+				intervalJson.addProperty("end", sdf.format(festival.getInterval()
+						.getEnd()));
 			} else {
 				intervalJson.addProperty("end", "");
 			}

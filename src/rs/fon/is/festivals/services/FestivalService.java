@@ -6,7 +6,9 @@ import rs.fon.is.festivals.domain.Festival;
 
 public interface FestivalService {
 	
-	public Collection<Festival> getFestivals(String genre);
+	public Collection<Festival> getFestivals(String genre, String date);
+	
+	public Collection<Festival> getAllFestivals();
 	
 	public Festival getFestival(String uri);
 

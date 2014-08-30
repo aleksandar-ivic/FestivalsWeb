@@ -9,10 +9,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TreeMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,5 +82,25 @@ public class Util {
 		}
 		return null;
 	}
+	
+	public static HashMap<Genre, Integer> sortMap(HashMap<Genre, Integer> map){
+		HashMap<Genre, Integer> sortedMap = new LinkedHashMap<>();
+		LinkedList<Integer> sortedValues = new LinkedList<>(map.values());
+		Collections.sort(sortedValues, new Comparator<Integer>() {
 
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o2 - o1;
+			}
+		});
+		for (Integer value : sortedValues) {
+			for (Genre genre : map.keySet()) {
+				if (value == map.get(genre)) {
+					sortedMap.put(genre, value);
+				}
+			}
+		}
+		
+		return sortedMap;
+	}
 }

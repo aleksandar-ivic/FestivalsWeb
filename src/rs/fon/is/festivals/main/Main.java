@@ -20,7 +20,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
+		/*ArrayList<String> ids = FestivalParser.getAllFestivalsIDs();
 		for (int i = 0; i < 20; i++) {
 			Festival festival = FestivalParser.parse(ids.get(i));
 			//System.out.println(festival.getUri());
@@ -33,8 +33,9 @@ public class Main {
 				DataModelManager.getInstance().save(artist);
 				//System.out.println(artist.getUri());
 			}
-		}
+		}*/
 
+		DataModelManager.getInstance().printout();
 		DataModelManager.getInstance().closeDataModel();
 		/*HashMap<String, Genre> mapOfGenres = Util.loadMap();
 		for (Genre genre : mapOfGenres.values()) {

@@ -1,6 +1,7 @@
 package rs.fon.is.festivals.rest;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.Encoded;
@@ -18,26 +19,42 @@ import com.google.gson.JsonObject;
 import rs.fon.is.festivals.domain.Festival;
 import rs.fon.is.festivals.services.FestivalServiceImpl;
 
-
 @Path("/festivals")
 public class FestivalsRest {
-	
+
 	private FestivalServiceImpl festivalsRepository = new FestivalServiceImpl();
-	
+
 	@GET
 	@Produces("application/json; charset=UTF-8")
-	public String getFestivalsWithGenre(@DefaultValue("") @QueryParam("genre") String genre){
-		Collection<Festival> festivals = festivalsRepository.getFestivals(genre);
-		if (festivals != null && !festivals.isEmpty()) {
-			JsonArray festivalsArray = new JsonArray();
-			for (Festival festival : festivals) {
-				JsonObject festivalJson = FestivalsJsonParser.serializeFestival(festival);
-				festivalsArray.add(festivalJson);
+	public String getFestivalsWithGenre(
+			@DefaultValue("") @QueryParam("genre") String genre, @DefaultValue("") @QueryParam("date") String date) {
+		if (!genre.equals("")) {
+			Collection<Festival> allFestivals = festivalsRepository
+					.getFestivals(genre, "");
+			if (allFestivals != null && !allFestivals.isEmpty()) {
+				JsonArray festivalsArray = new JsonArray();
+				for (Festival festival : allFestivals) {
+					JsonObject festivalJson = FestivalsJsonParser
+							.serializeFestival(festival);
+					festivalsArray.add(festivalJson);
+				}
+				return festivalsArray.toString();
 			}
-			return festivalsArray.toString();
+		}
+
+		if (!date.equals("")) {
+			Collection<Festival> allFestivals = festivalsRepository
+					.getFestivals("", date);
+			if (allFestivals != null && !allFestivals.isEmpty()) {
+				JsonArray festivalsArray = new JsonArray();
+				for (Festival festival : allFestivals) {
+					JsonObject festivalJson = FestivalsJsonParser
+							.serializeFestival(festival);
+					festivalsArray.add(festivalJson);
+				}
+				return festivalsArray.toString();
+			}
 		}
 		return "{}";
-		//throw new WebApplicationException(Response.Status.NO_CONTENT);
 	}
-
 }

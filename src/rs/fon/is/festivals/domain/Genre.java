@@ -1,6 +1,7 @@
 package rs.fon.is.festivals.domain;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import rs.fon.is.festivals.util.Constants;
 import thewebsemantic.Namespace;
@@ -10,7 +11,6 @@ import thewebsemantic.RdfType;
 @Namespace(Constants.MO)
 @RdfType("Genre")
 public class Genre extends Thing implements Serializable {
-
 
 	@RdfProperty(Constants.DC + "title")
 	private String title;
