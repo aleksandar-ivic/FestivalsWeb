@@ -10,7 +10,7 @@ Application workflow has 5 phases:
 
 1. XML parser get's festival IDs from web service [AudioScrobbler WebService](http://www.audioscrobbler.net/).
 2. For each festival ID [last.fm API](http://www.last.fm/api) get's data about festival, it's location, interval and lineup.
-3. That data is transformed into RDF triplets based on [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline](http://purl.org/NET/c4dm/timeline.owl#), [EVENT](http://purl.org/NET/c4dm/event.owl#) and [TIME](http://www.w3.org/2006/time#) vocabularies.
+3. That data is transformed into RDF triplets based on [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#), [The Event Ontology](http://purl.org/NET/c4dm/event.owl#) and [Time Ontology](http://www.w3.org/2006/time#) vocabularies.
 4. Data is persisted into an RDF repository
 5. Access to the data is enabled through RESTful services
 
