@@ -43,8 +43,8 @@ This application collects data about festivals from the [last.fm](http://www.las
 The applications contains two REST services.
 
 **GET /api/festivals** - returns data about festival. Service's parameter is:
- *- genre - specifies the genre of returned festivals
- *- date - specifies the start date of festival
+ - genre - specifies the genre of returned festivals
+ - date - specifies the start date of festival
   
 An example of this service call:  
 
