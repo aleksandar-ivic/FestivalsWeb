@@ -78,8 +78,12 @@ Implementation of the RESTful web service is supported by [Jersey](https://jerse
 To use this application you have to do the following steps:
 
 **Step 1**: To collect data about festivals, run project as Java console application. (Picture 2.)  
+![step1](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step1.png)  
+Picture 2. Run project as Java console application.
 
-**Step 2**: Go to *yourServerUrl/index.html* and click "Let's rock!" (Picture 3.)  
+**Step 2**: Go to *yourServerUrl/index.html* and click "Let's rock!" (Picture 3.)
+![step1](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step2.png)  
+Picture 3. Let's rock!
   
 **Step 3**: Choose genre or choose start date of the festival to mark festivals on the map (Picture 4. and Picture 5.)
 
