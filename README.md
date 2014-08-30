@@ -4,7 +4,7 @@ Festivals
 1. About the project
 ===================
 
-The main idea of this application is to get data about music festivals in Europe from [last.fm](http://www.last.fm/) and then show that data on map. The data is collected using [last.fm API](http://www.last.fm/api) to find festivals by its ID, which are provided by web service [AudioScrobbler WebService](http://www.audioscrobbler.net/). After the data is collected, it is transformed to RDF format and stored into RDF repository. Access to the collected data is enabled through RESTful services.
+The main idea of this application is to get data about music festivals in Europe from [last.fm](http://www.last.fm/) and then show that data on map. The data is collected using [last.fm API](http://www.last.fm/api) to find festivals by its ID, which are provided by web service [AudioScrobbler](http://www.audioscrobbler.net/). After the data is collected, it is transformed to RDF format and stored into RDF repository. Access to the collected data is enabled through RESTful services.
 
 Application workflow has 5 phases:
 
