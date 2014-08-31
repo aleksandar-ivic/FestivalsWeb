@@ -17,7 +17,7 @@ Application workflow has 5 phases:
 
 2. Domain model
 ===============
-Data about festivals from the [last.fm](http://www.last.fm/) website are analyzed in order to determine which classes and properties from the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#), [The Event Ontology](http://purl.org/NET/c4dm/event.owl#) and [Time Ontology](http://www.w3.org/2006/time#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
+Data about festivals from the [last.fm](http://www.last.fm/) website is analyzed in order to determine which classes and properties from the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend](http://xmlns.com/foaf/0.1/), [Basic Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#), [The Event Ontology](http://purl.org/NET/c4dm/event.owl#) and [Time Ontology](http://www.w3.org/2006/time#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
 
 ![domain](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/domain_model.png)
 
