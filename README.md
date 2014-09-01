@@ -58,10 +58,11 @@ An example call of this service looks like following:
 
 An example of this service call:
 
-  *GET/genres*  
-  ![genres json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/genresJson.png)  
-  
-  Picture 3. Example of JSON respones for getting all genres.
+  *GET/genres*    
+    
+    ![genres json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/genresJson.png)  
+    
+    Picture 3. Example of JSON respones for getting all genres.
   
 GET request to one of these two service triggers the [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) query and the application returns JSON with query results. This services are used to show data about festivals and mark those festivals on the map.
 
