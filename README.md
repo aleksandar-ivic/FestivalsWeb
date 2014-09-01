@@ -71,7 +71,7 @@ GET request to one of these two service triggers the [SPARQL](http://www.w3.org/
 
 This application is written in Java programming language.
 
-This application uses [last.fm API](http://www.last.fm/api) for collecting all relevant data about festivals based on festival ID from [AudioScrobbler WebService](http://www.audioscrobbler.net/). [lastfm-java](https://code.google.com/p/lastfm-java/) is used for calling the services of [last.fm API](http://www.last.fm/api).
+This application uses [last.fm API](http://www.last.fm/api) for collecting all relevant data about festivals based on festival ID from [AudioScrobbler WebService](http://www.audioscrobbler.net/). [lastfm-java](https://code.google.com/p/lastfm-java/) library is used for calling the services of [last.fm API](http://www.last.fm/api).
 
 Application uses [Jenabean](https://code.google.com/p/jenabean/) library for mapping Java objects into RDF triplets using annotations. Jenabean provides explicit binding between an object property and a particular RDF property.
 
