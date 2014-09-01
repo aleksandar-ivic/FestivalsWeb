@@ -15,7 +15,7 @@ public class MusicArtist extends Thing {
 	@RdfProperty(Constants.FOAF + "name")
 	private String name;
 
-	@RdfProperty(Constants.DC + "subject")
+	@RdfProperty(Constants.MO + "genre")
 	private Collection<String> genres;
 
 	public MusicArtist() {

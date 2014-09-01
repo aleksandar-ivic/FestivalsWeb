@@ -13,7 +13,7 @@ import thewebsemantic.RdfType;
 @RdfType("Festival")
 public class Festival extends Thing {
 
-	@RdfProperty(Constants.FOAF + "name")
+	@RdfProperty(Constants.DC + "title")
 	private String festivalName;
 
 	@RdfProperty(Constants.EVENT + "time")
