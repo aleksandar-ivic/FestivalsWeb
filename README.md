@@ -50,7 +50,7 @@ An example call of this service looks like following:
 
   *GET/ festivals?genre=rock&date=date=08/30/2014*  
     
-    ![festivals json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/festsJson.png)  
+![festivals json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/festsJson.png)  
     
     Picture 2. Example of JSON response for getting festival.
 
@@ -60,7 +60,7 @@ An example of this service call:
 
   *GET/genres*    
     
-    ![genres json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/genresJson.png)  
+![genres json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/genresJson.png)  
     
     Picture 3. Example of JSON respones for getting all genres.
   
