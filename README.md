@@ -48,13 +48,18 @@ The application allows access to that data through RESTful services:
   
 An example call of this service looks like following:  
 
-  *GET/ festivals?genre=rock&date=date=08/30/2014*
+  *GET/ festivals?genre=rock&date=date=08/30/2014*  
+    
+    ![festivals json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/festsJson.png)
+    Picture 2. Example of JSON response for getting festival.
 
-**GET /api/genres** - returns data about all genres. It has no parameters.
+**GET /api/genres** - returns data about all genres. It has no parameters.  
 
 An example of this service call:
 
-  *GET/genres*
+  *GET/genres*  
+  ![genres json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/genresJson.png)
+  Picture 3. Example of JSON respones for getting all genres.
   
 GET request to one of these two service triggers the [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) query and the application returns JSON with query results. This services are used to show data about festivals and mark those festivals on the map.
 
@@ -76,25 +81,25 @@ Implementation of the RESTful web service is supported by [Jersey](https://jerse
   
 To use this application one has to do the following steps:
 
-**Step 1**: To collect data about festivals, run project as Java console application. (Picture 2.)  
+**Step 1**: To collect data about festivals, run project as Java console application. (Picture 5.)  
 ![step1](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step1.png)  
-Picture 2. Run project as Java console application.
+Picture 3. Run project as Java console application.
 
-**Step 2**: Go to *<yourServerUrl>/index.html* and click "Let's rock!" (Picture 3.)
+**Step 2**: Go to *<yourServerUrl>/index.html* and click "Let's rock!" (Picture 4.)
 ![step2](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step2.png)  
-Picture 3. Let's rock!
+Picture 4. Let's rock!
   
-**Step 3**: Choose genre or choose start date of the festival to mark festivals on the map (Picture 4.)
+**Step 3**: Choose genre or choose start date of the festival to mark festivals on the map (Picture 5.)
 ![step3](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step3.png)  
-Picture 4. Choose genre or date to mark festivals on the map.
+Picture 5. Choose genre or date to mark festivals on the map.
 
 
-**Step 4**: When you have found the festival you like, click on the marker to get information about that festival (Picture 5. and Picture 6.)
+**Step 4**: When you have found the festival you like, click on the marker to get information about that festival (Picture 6. and Picture 7.)
 ![step4](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step4.png)  
-Picture 5. Click on the marker to get information about the chosen festival.  
+Picture 6. Click on the marker to get information about the chosen festival.  
 
 ![step5](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/step5.png)
-Picture 6. Example of information about one festival.
+Picture 7. Example of information about one festival.
 
 6. Acknowledgements
 ===================
