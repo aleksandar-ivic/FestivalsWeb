@@ -79,10 +79,10 @@ Example of SPARQL query for getting festivals from 09.01.2014 to 09.30.2014:
     WHERE
     {
     ?festival rdf:type mo:Festival;  
-	event:time ?interval .
-	?interval a tl:Interval ;
-		tl:start ?start ;
-		tl:end ?end .
+      event:time ?interval .  
+      ?interval a tl:Interval ;  
+        tl:start ?start ;  
+        tl:end ?end .
 	FILTER(?start >= "2014-09-01T22:00:00Z"^^xsd:dateTime && ?end <= "2014-09-30T22:00:00Z"^^xsd:dateTime)
     }
 
