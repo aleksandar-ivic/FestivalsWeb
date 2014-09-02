@@ -42,9 +42,10 @@ This application retrieves data about music festivals in Europe from the last.fm
 
 The application allows access to that data through RESTful services:
 
-**GET /api/festivals** - returns data about a festival. Parameters supported are:
+**GET /api/festivals** - returns data about a festivals in given interval and genre. Parameters supported are:
  - genre - specifies a genre of festivals
- - date - specifies a start date of festivals
+ - dateFrom - specifies start date of interval
+ - dateTo - specifies end date of interval
   
 An example call of this service looks like following:  
 
