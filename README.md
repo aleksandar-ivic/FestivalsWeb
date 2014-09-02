@@ -55,7 +55,7 @@ An example call of this service looks like following:
     
  Picture 2. Example of JSON response for getting festival.
 
-**GET /api/genres** - returns data about all genres. It has no parameters.  
+**GET /api/genres** - returns data about all genres and number of festivals that have at least one artist that plays that genre. It has no parameters.  
 
 An example of this service call:
 
