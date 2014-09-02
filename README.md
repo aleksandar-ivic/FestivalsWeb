@@ -86,6 +86,19 @@ Example of SPARQL query for getting festivals from 09.01.2014 to 09.30.2014:
 	FILTER(?start >= "2014-09-01T22:00:00Z"^^xsd:dateTime && ?end <= "2014-09-30T22:00:00Z"^^xsd:dateTime)
     }
 
+SPARQL query for getting all festivals:
+  
+  PREFIX dc:<http://purl.org/dc/elements/1.1/>PREFIX mo:<http://purl.org/ontology/mo/>  
+  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+  PREFIX ns:<http://is.fon.rs/rdfFestivals/>   
+  SELECT DISTINCT ?genre   
+  WHERE  
+  {  
+  ?genre rdf:type mo:Genre;
+	dc:title ?title.  
+  }  
+  ORDER BY DESC(?title)
+	 	
 
 
 4. Technical realisation
