@@ -87,8 +87,20 @@ function getFestivalsWithDate() {
 			+ dateTo);
 	if (json.length > 0) {
 		setupMap(JSON.stringify(json));
+		var links = document.getElementsByTagName('a');
+		for (var i = 0; i < links.length; i++) {
+			if (links[i].className == 'btn-genre') {
+				links[i].style.backgroundColor = '#424342';
+			}
+		}
+		document.getElementById('datepicker1').value = '';
+		document.getElementById('datepicker2').value = '';
 	} else {
-		alert("There are no festivals that start on: " + date);
+		alert("There are no festivals in this interval");
+		initialize();
+		document.getElementById('datepicker1').value = '';
+		document.getElementById('datepicker2').value = '';
+		
 	}
 
 }
@@ -195,7 +207,10 @@ function setupMap(json) {
 }
 
 function getFestivalsWithGenre(selectValue) {
-	var json = getData("festivals?genre=" + selectValue + "&?date=");
+	var json = getData("festivals?genre=" + selectValue + "&?dateFrom=&dateTo=" );
+	console.log(JSON.stringify(json));
 	setupMap(JSON.stringify(json));
 	changeLinkColor(selectValue);
+	document.getElementById('datepicker1').value = '';
+	document.getElementById('datepicker2').value = '';
 }

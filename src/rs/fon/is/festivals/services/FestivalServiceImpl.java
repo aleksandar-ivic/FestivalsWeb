@@ -55,6 +55,7 @@ public class FestivalServiceImpl implements FestivalService {
 			String tdbDateTo = splitedDateTo[2]+"-"+splitedDateTo[0]+"-"+splitedDateTo[1]+"T22:00:00Z";
 			query.append("\tFILTER(?start >= \"" + tdbDateFrom + "\"^^xsd:dateTime && ?end <= \"" + tdbDateTo + "\"^^xsd:dateTime)\n");
 			query.append("}");
+			System.out.println(query);
 		}
 
 		
