@@ -69,22 +69,22 @@ GET request to one of these two service triggers the [SPARQL](http://www.w3.org/
 
 Example of SPARQL query for getting festivals from 09.01.2014 to 09.30.2014:  
   
-    PREFIX dc:<http://purl.org/dc/elements/1.1/>PREFIX mo:<http://purl.org/ontology/mo/> 
-PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX ns:<http://is.fon.rs/rdfFestivals/> 
-PREFIX event:<http://purl.org/NET/c4dm/event.owl#> 
-PREFIX tl:<http://purl.org/NET/c4dm/timeline.owl#> 
-PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> 
-SELECT DISTINCT ?festival 
-WHERE
-{
- 	?festival rdf:type mo:Festival;
+    PREFIX dc:<http://purl.org/dc/elements/1.1/>PREFIX mo:<http://purl.org/ontology/mo/>
+    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX ns:<http://is.fon.rs/rdfFestivals/> 
+    PREFIX event:<http://purl.org/NET/c4dm/event.owl#> 
+    PREFIX tl:<http://purl.org/NET/c4dm/timeline.owl#>
+    PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> 
+    SELECT DISTINCT ?festival 
+    WHERE
+    {
+    ?festival rdf:type mo:Festival;
 	event:time ?interval .
 	?interval a tl:Interval ;
 		tl:start ?start ;
 		tl:end ?end .
 	FILTER(?start >= "2014-09-01T22:00:00Z"^^xsd:dateTime && ?end <= "2014-09-30T22:00:00Z"^^xsd:dateTime)
-}
+    }
 
 
 
