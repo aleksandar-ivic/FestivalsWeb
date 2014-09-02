@@ -1906,7 +1906,8 @@ pre code {
     float: left;
   }
   .col-lg-12 {
-    width: 100%;
+    width: 40%;
+    display: inline;
   }
   .col-lg-11 {
     width: 91.66666667%;
@@ -2748,6 +2749,7 @@ select[multiple].input-lg {
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
+.btn:active:visited,
 .btn:hover,
 .btn:focus {
   color: #333;

@@ -185,7 +185,7 @@ hr.small {
 
 .mapOfFests {
     display: table;
-    width: 100%;
+    width: 60%;
     height: 100%;
     color: #fff;
     margin-top: 10%;
@@ -199,9 +199,10 @@ hr.small {
 /* FestInfo */
 
 .festInfo {
+	position: relative;
+	width: 120%;
 	height: auto;
-    padding: 50px 0;
-    background-color: #424342;
+    margin-bottom: 30px;
 }
 
 .festInfo-item {

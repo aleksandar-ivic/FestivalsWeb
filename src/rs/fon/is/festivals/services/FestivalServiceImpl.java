@@ -17,7 +17,7 @@ public class FestivalServiceImpl implements FestivalService {
 	}
 
 	@Override
-	public Collection<Festival> getFestivals(String genre, String date) {
+	public Collection<Festival> getFestivals(String genre, String dateFrom, String dateTo) {
 		StringBuffer query = new StringBuffer();
 		// prefix part
 		query.append("PREFIX dc:<" + Constants.DC + ">");
@@ -43,14 +43,17 @@ public class FestivalServiceImpl implements FestivalService {
 			query.append("\tFILTER regex(?genreName,\"" + genre + "\")\n");
 			query.append("}");
 		}
-		if (!date.equals("")) {
+		if (!dateFrom.equals("") && !dateTo.equals("")) {
 			query.append(" \t?festival rdf:type mo:Festival;\n");
 			query.append("\tevent:time ?interval .\n");
 			query.append("\t?interval a tl:Interval ;\n");
-			query.append("	\ttl:end ?start .\n");
-			String[] splitedDate = date.split("/");
-			String tdbDate = splitedDate[2]+"-"+splitedDate[0]+"-"+splitedDate[1]+"T22:00:00Z";
-			query.append("\tFILTER(?start >= \"" + tdbDate + "\"^^xsd:dateTime)\n");
+			query.append("	\ttl:start ?start ;\n");
+			query.append("	\ttl:end ?end .\n");
+			String[] splitedDateFrom = dateFrom.split("/");
+			String[] splitedDateTo = dateTo.split("/");
+			String tdbDateFrom = splitedDateFrom[2]+"-"+splitedDateFrom[0]+"-"+splitedDateFrom[1]+"T22:00:00Z";
+			String tdbDateTo = splitedDateTo[2]+"-"+splitedDateTo[0]+"-"+splitedDateTo[1]+"T22:00:00Z";
+			query.append("\tFILTER(?start >= \"" + tdbDateFrom + "\"^^xsd:dateTime && ?end <= \"" + tdbDateTo + "\"^^xsd:dateTime)\n");
 			query.append("}");
 			System.out.println(query);
 		}

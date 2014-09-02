@@ -27,10 +27,10 @@ public class FestivalsRest {
 	@GET
 	@Produces("application/json; charset=UTF-8")
 	public String getFestivalsWithGenre(
-			@DefaultValue("") @QueryParam("genre") String genre, @DefaultValue("") @QueryParam("date") String date) {
+			@DefaultValue("") @QueryParam("genre") String genre, @DefaultValue("") @QueryParam("dateFrom") String dateFrom, @DefaultValue("") @QueryParam("dateTo") String dateTo) {
 		if (!genre.equals("")) {
 			Collection<Festival> allFestivals = festivalsRepository
-					.getFestivals(genre, "");
+					.getFestivals(genre, "", "");
 			if (allFestivals != null && !allFestivals.isEmpty()) {
 				JsonArray festivalsArray = new JsonArray();
 				for (Festival festival : allFestivals) {
@@ -42,9 +42,9 @@ public class FestivalsRest {
 			}
 		}
 
-		if (!date.equals("")) {
+		if (!dateFrom.equals("") && !dateTo.equals("")) {
 			Collection<Festival> allFestivals = festivalsRepository
-					.getFestivals("", date);
+					.getFestivals("", dateFrom, dateTo);
 			if (allFestivals != null && !allFestivals.isEmpty()) {
 				JsonArray festivalsArray = new JsonArray();
 				for (Festival festival : allFestivals) {

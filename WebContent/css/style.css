@@ -1,52 +1,114 @@
-h3{
+h3 {
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px gray;
 }
-h4{
+
+#datePickerH4 {
+	color: #424342;
+	float: left;
+}
+
+p {
 	color: black;
 }
-p{
-	color: black;	
-}
-#map-canvas{
-	positon: relative;
-	width:70%;
-    height:80%;
-    scrolling:no;
-    margin: 0 auto;
-    padding-top: 50px;
-}	
-#datepicker{
-	margin-top: 75px;
-}
-#datePickerH2{
-	margin-top: 75px;
-	margin-left: 160px;
+
+#map-canvas {
+	width: 100%;
+	height: 500px;
 }
 
-#showMe{
-	margin-left: 50px;
-}
-
-#datepicker{
+#datepicker1,#datepicker2 {
+	float: left;
 	color: #424342;
+	vertical-align: top;
 }
 
-#mapH2{
+#datePickerH2 {
+	float: left;
+}
+
+#mapH2 {
 	color: #424342;
 	margin-bottom: 15px;
+	text-align: center;
 }
 
-#lineup{
-	color: white;
+#lineup {
+	color: #424342;
 }
 
-#artists{
+#artists {
 	height: auto;
-	margin-left: 20px;
-	
 }
 
-#festName{
-	color: white;
+#festName {
+	color: #424342;
+}
+
+.btn-genre {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 0;
+	color: #fff;
+	background-color: #424342;
+}
+
+.btn-genre:hover {
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.4);
+	text-decoration: none;
+}
+
+.btn-genre:active {
+	background-image: none;
+	outline: 0;
+	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+	outline: thin dotted;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.4);
+	text-decoration: none;
+}
+
+.googleMap {
+	float: left;
+	display: inline;
+	width: 60%;
+	height: 100%;
+	margin-bottom: 50px;
+}
+
+#showMe {
+	width: 30%;
+	margin-right: 13%;
+	margin-top: 30px;
+}
+
+.dates {
+	display: inline;
+}
+
+.dateFrom,.dateTo {
+	float: left;
+	width: 200px;
+}
+
+#genres {
+	margin-bottom: 25px;
 }

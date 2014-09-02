@@ -32,27 +32,7 @@
 </head>
 
 <body onload="getDataGenre()">
-    
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top">Festivals</a>
-            </li>
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#genreList">Choose criteria</a>
-            </li>
-            <li>
-                <a href="#map">Map</a>
-            </li>
-        </ul>
-    </nav>
-    
+
 	<!-- Header -->
 	<header id="top" class="header">
 		<div class="text-vertical-center">
@@ -64,57 +44,66 @@
 	</header>
 
 	<!-- GenreList -->
-	<section id="genreList" class="genreList">
-		<div class="container">
+
+	<div class="container">
+		<section id="genreList" class="genreList">
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<h2>Choose genre to show festivals:</h2>
-					<span id="genres"></span>
+					</br> <span id="genres"></span> </br> </br>
+					<h2 id="mapH2">Or choose date:</h2>
+					<div class="dates">
+						<div class="dateFrom">
+							<h4 id="datePickerH4">
+								From:</br> <input type="text" id="datepicker1">
+							</h4>
+						</div>
+						<div class="dateTo">
+							<h4 id="datePickerH4">
+								To:</br> <input type="text" id="datepicker2">
+							</h4>
+						</div>
+						</br> </br> <a href="#map" class="btn btn-dark btn-genre" id="showMe"
+							onclick="getFestivalsWithDate()">Show me!</a>
+					</div>
+				</div>
+				<div class="googleMap">
+					<h2 id="mapH2">Festivals on map:</h2>
+					<div id="map-canvas"></div>
 				</div>
 			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /.container -->
-	</section>
 
-	<!-- Genres -->
-	<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-	<section id="datePicker" class="services bg-primary">
-		<div class="container" id="datePicker">
-			<h2 id="datePickerH2">Or choose date: <input type="text" id="datepicker"><a href="#map" class="btn btn-dark btn-lg" id="showMe" onclick="getFestivalsWithDate()">Show me!</a></h2>
-		</div>
 
-	</section>
+			<!-- FestInfo -->
+			<div id="festivalInfo">
+				<section id="festInfo" class="festInfo">
+					<div class="container" id="artists">
+						<h2 id="lineup"></h2>
 
-	<!-- MapOfFests-->
-	<aside class="mapOfFests">
-		<div class="text-vertical-center" id="map">
-		
-			<h2 id="mapH2">Festivals on map:</h2>
-            <div id="map-canvas" ></div>
-        </section>
-		</div>
-	</aside>
-
-	<!-- FestInfo -->
-	<section id="festInfo" class="festInfo">
-		<div class="container" id="artists">
-			<h2 id="lineup"></h2>
-			
-		</div>
-	</section>
-
-	<!-- Footer -->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 col-lg-offset-1 text-center">
-					<hr class="small">
-					<p class="text-muted">Copyright &copy; Aleksandar Ivic</p>
-				</div>
+					</div>
+				</section>
 			</div>
-		</div>
-	</footer>
+
+			<!-- Footer -->
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-10 col-lg-offset-1 text-center">
+							<hr class="small">
+							<p class="text-muted">Copyright &copy; Aleksandar Ivic</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+		</section>
+
+
+	</div>
+	<!-- /.container -->
+
+
+
 
 	<!-- jQuery Version 1.11.0 -->
 	<script src="js/jquery-1.11.0.js"></script>
@@ -127,44 +116,55 @@
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script type="text/javascript" src="js/requests.js"></script>
 	<script type="text/javascript" src="js/getData.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script>
-            // Closes the sidebar menu
-            $("#menu-close").click(function(e) {
-                e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("active");
-            });
+		// Closes the sidebar menu
+		$("#menu-close").click(function(e) {
+			e.preventDefault();
+			$("#sidebar-wrapper").toggleClass("active");
+		});
 
-            // Opens the sidebar menu
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("active");
-            });
+		// Opens the sidebar menu
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#sidebar-wrapper").toggleClass("active");
+		});
 
-            // Scrolls to the selected menu item on the page
-            $(function() {
-                $('a[href*=#]:not([href=#])').click(function() {
-                    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+		// Scrolls to the selected menu item on the page
+		$(function() {
+			$('a[href*=#]:not([href=#])')
+					.click(
+							function() {
+								if (location.pathname.replace(/^\//, '') == this.pathname
+										.replace(/^\//, '')
+										|| location.hostname == this.hostname) {
 
-                        var target = $(this.hash);
-                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                        if (target.length) {
-                            $('html,body').animate({
-                                scrollTop: target.offset().top
-                            }, 1000);
-                            return false;
-                        }
-                    }
-                });
-            });
-        </script>
+									var target = $(this.hash);
+									target = target.length ? target
+											: $('[name=' + this.hash.slice(1)
+													+ ']');
+									if (target.length) {
+										$('html,body').animate({
+											scrollTop : target.offset().top
+										}, 1000);
+										return false;
+									}
+								}
+							});
+		});
+	</script>
 	<script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>
+		$(function() {
+			$("#datepicker1").datepicker();
+		});
+	</script>
+	<script>
+		$(function() {
+			$("#datepicker2").datepicker();
+		});
+	</script>
 
 </body>
 
