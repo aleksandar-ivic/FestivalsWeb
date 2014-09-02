@@ -55,7 +55,6 @@ public class FestivalServiceImpl implements FestivalService {
 			String tdbDateTo = splitedDateTo[2]+"-"+splitedDateTo[0]+"-"+splitedDateTo[1]+"T22:00:00Z";
 			query.append("\tFILTER(?start >= \"" + tdbDateFrom + "\"^^xsd:dateTime && ?end <= \"" + tdbDateTo + "\"^^xsd:dateTime)\n");
 			query.append("}");
-			System.out.println(query);
 		}
 
 		
@@ -64,7 +63,6 @@ public class FestivalServiceImpl implements FestivalService {
 				.executeOneVariableSelectSparqlQuery(query.toString(),
 						"festival", DataModelManager.getInstance().getModel());
 		Collection<Festival> festivals = new ArrayList<>();
-		System.out.println(queryResults.size());
 		if (queryResults != null && !queryResults.isEmpty()) {
 			for (String uri : queryResults) {
 				Festival f = getFestival(uri);

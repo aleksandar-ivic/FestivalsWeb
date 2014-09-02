@@ -170,10 +170,8 @@ public class FestivalParser {
 			Date start = event.getStartDate();			
 			try {
 				String startFormat = sdf.format(start);
-				System.out.println(start.toString());
 				start = null;
 				start = sdf.parse(startFormat);
-				System.out.println(sdf.parse(startFormat));
 				interval.setStart(start);
 				Date end = event.getEndDate();
 				if (end == null) {
@@ -186,8 +184,6 @@ public class FestivalParser {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			System.out.println(interval);
 			interval.setUri(URIGenerator.generate(interval));
 			return interval;
 		} catch (URISyntaxException e1) {
