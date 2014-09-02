@@ -65,7 +65,27 @@ An example of this service call:
     
  Picture 3. Example of JSON respones for getting all genres.
   
-GET request to one of these two service triggers the [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) query and the application returns JSON with query results. This services are used to show data about festivals and mark those festivals on the map.
+GET request to one of these two service triggers the [SPARQL](http://www.w3.org/TR/rdf-sparql-query/) query and the application returns JSON with query results. This services are used to show data about genres and festivals and mark those festivals on the map.
+
+Example of SPARQL query for getting festivals from 09.01.2014 to 09.30.2014:  
+
+PREFIX dc:<http://purl.org/dc/elements/1.1/>PREFIX mo:<http://purl.org/ontology/mo/> 
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ns:<http://is.fon.rs/rdfFestivals/> 
+PREFIX event:<http://purl.org/NET/c4dm/event.owl#> 
+PREFIX tl:<http://purl.org/NET/c4dm/timeline.owl#> 
+PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> 
+SELECT DISTINCT ?festival 
+WHERE
+{
+ 	?festival rdf:type mo:Festival;
+	event:time ?interval .
+	?interval a tl:Interval ;
+		tl:start ?start ;
+		tl:end ?end .
+	FILTER(?start >= "2014-09-01T22:00:00Z"^^xsd:dateTime && ?end <= "2014-09-30T22:00:00Z"^^xsd:dateTime)
+}
+
 
 4. Technical realisation
 ========================
