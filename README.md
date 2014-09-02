@@ -78,7 +78,7 @@ Example of SPARQL query for getting festivals from 09.01.2014 to 09.30.2014:
     SELECT DISTINCT ?festival 
     WHERE
     {
-    ?festival rdf:type mo:Festival;
+    ?festival rdf:type mo:Festival;  
 	event:time ?interval .
 	?interval a tl:Interval ;
 		tl:start ?start ;
