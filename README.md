@@ -48,7 +48,7 @@ The application allows access to that data through RESTful services:
   
 An example call of this service looks like following:  
 
-  *GET/ festivals?genre=rock&date=date=08/30/2014*  
+  *GET/ festivals?genre=rock&date=dateFrom=08/30/2014&dateTo=09/10/2014*  
     
 ![festivals json](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/festsJson.png)  
     
