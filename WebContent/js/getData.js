@@ -2,6 +2,28 @@ var google_map;
 var info_window;
 var mapOptions;
 var festivals;
+var prevClickedLink;
+var firstClick = true;
+
+function changeLinkColor(id) {
+	var links = document.getElementsByTagName('a');
+	//console.log(links);
+	var selectedLink = '';
+	
+	for (var i = 0; i < links.length; i++) {
+		if (links[i].id==id) {
+			selectedLink = document.getElementById(links[i].id);
+			selectedLink.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';		
+		}
+	}
+	
+	for (var i = 0; i < links.length; i++) {
+		if (links[i].className == 'btn-genre' && links[i].id != id) {
+			links[i].style.backgroundColor = '#424342';
+		}
+	}
+
+}
 
 function addItem(json) {
 	var mostPopularGenres = [ 'techno', 'house', 'minimal', 'trance', 'indie',
@@ -15,7 +37,7 @@ function addItem(json) {
 	for (var i = 0; i < genres.length; i++) {
 		for (g in mostPopularGenres) {
 			if (mostPopularGenres[g] == genres[i].title) {
-				div.innerHTML = div.innerHTML +'       '
+				div.innerHTML = div.innerHTML + '       '
 						+ '<a href="#map" class="btn-genre" id="'
 						+ genres[i].title
 						+ '" onclick="getFestivalsWithGenre(id);">'
@@ -61,7 +83,8 @@ function getFestivalsWithDate() {
 		return;
 	}
 	var json = new Array();
-	json = getData("festivals?genre=&dateFrom=" + dateFrom +"&dateTo=" + dateTo);
+	json = getData("festivals?genre=&dateFrom=" + dateFrom + "&dateTo="
+			+ dateTo);
 	if (json.length > 0) {
 		setupMap(JSON.stringify(json));
 	} else {
@@ -109,7 +132,7 @@ function setupMap(json) {
 			var end = festivals[j].interval.end;
 			d2.push(end);
 			var festivalName = festivals[j].festivalName;
-			
+
 			t.push(festivalName);
 			var lat = festivals[j].location.lat;
 			x.push(lat);
@@ -118,7 +141,6 @@ function setupMap(json) {
 			h.push('<p><strong>' + festivalName + '</strong></br>Location: '
 					+ locationName + '</p>');
 		}
-		
 
 	}
 	var index = 0;
@@ -173,8 +195,7 @@ function setupMap(json) {
 }
 
 function getFestivalsWithGenre(selectValue) {
-	var link = document.getElementById(selectValue);
-	link.color = 'red';
 	var json = getData("festivals?genre=" + selectValue + "&?date=");
 	setupMap(JSON.stringify(json));
+	changeLinkColor(selectValue);
 }
