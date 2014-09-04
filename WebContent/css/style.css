@@ -3,6 +3,18 @@ h3 {
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px gray;
 }
 
+.reset{
+	color : #424342;
+	float: right;
+}
+
+.reset:hover,
+.reset:focus,
+.reset:active{
+	color: rgba(0, 0, 0, 0.4);
+	text-decoration: none;
+}
+
 #datePickerH4 {
 	color: #424342;
 	float: left;

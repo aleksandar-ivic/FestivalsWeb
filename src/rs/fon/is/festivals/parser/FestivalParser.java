@@ -146,6 +146,9 @@ public class FestivalParser {
 		try {
 			Venue venue = event.getVenue();
 			String city = venue.getCity();
+			if (city == null || city.isEmpty()) {
+				throw new Exception();
+			}
 			double[] latlng = getLatAndLng(city);
 			Location location = new Location(city, latlng[0], latlng[1]);
 			location.setUri(URIGenerator.generate(location));

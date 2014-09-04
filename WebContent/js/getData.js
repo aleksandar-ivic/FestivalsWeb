@@ -2,27 +2,33 @@ var google_map;
 var info_window;
 var mapOptions;
 var festivals;
-var prevClickedLink;
 var firstClick = true;
+var selectedGenres = '';
+var generatedMarkers = new Array();
 
 function changeLinkColor(id) {
 	var links = document.getElementsByTagName('a');
-	//console.log(links);
 	var selectedLink = '';
-	
+
 	for (var i = 0; i < links.length; i++) {
-		if (links[i].id==id) {
+		if (links[i].id == id) {
 			selectedLink = document.getElementById(links[i].id);
-			selectedLink.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';		
+			selectedLink.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
 		}
 	}
-	
+}
+
+function resetCriteria() {
+	var links = document.getElementsByTagName('a');
 	for (var i = 0; i < links.length; i++) {
-		if (links[i].className == 'btn-genre' && links[i].id != id) {
+		if (links[i].className == 'btn-genre') {
 			links[i].style.backgroundColor = '#424342';
 		}
 	}
-
+	selectedGenres = '';
+	document.getElementById('datepicker1').value = '';
+	document.getElementById('datepicker2').value = '';
+	initialize();
 }
 
 function addItem(json) {
@@ -39,8 +45,7 @@ function addItem(json) {
 			if (mostPopularGenres[g] == genres[i].title) {
 				div.innerHTML = div.innerHTML + '       '
 						+ '<a href="#map" class="btn-genre" id="'
-						+ genres[i].title
-						+ '" onclick="getFestivalsWithGenre(id);">'
+						+ genres[i].title + '" onclick="selectGenre(id);">'
 						+ genres[i].title + '(' + genres[i].numOfFestWithGenre
 						+ ")</a>";
 
@@ -71,52 +76,60 @@ function initialize() {
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
-function getFestivalsWithDate() {
+function getFestivals() {
+	initialize();
 	var dateFrom = document.getElementById('datepicker1').value;
 	var dateTo = document.getElementById('datepicker2').value;
-	if (dateFrom == '') {
-		alert("You must set date from!");
+	if (selectedGenres == '' && dateFrom == '' && dateTo == '') {
+		alert("You must choose at least one criteria!");
 		return;
 	}
-	if (dateTo == '') {
-		alert("You must set date to!");
+	if ((dateFrom != '' && dateTo == '') || (dateFrom == '' && dateTo != '')) {
+		alert("You must set both values for interval!");
 		return;
 	}
-	var json = new Array();
-	json = getData("festivals?genre=&dateFrom=" + dateFrom + "&dateTo="
-			+ dateTo);
-	if (json.length > 0) {
-		setupMap(JSON.stringify(json));
-		var links = document.getElementsByTagName('a');
-		for (var i = 0; i < links.length; i++) {
-			if (links[i].className == 'btn-genre') {
-				links[i].style.backgroundColor = '#424342';
-			}
+	if (dateFrom != '' && dateTo != '' && selectedGenres != '') {
+		var json = new Array();
+		json = getData("festivals?genre=" + selectedGenres + "&dateFrom="
+				+ dateFrom + "&dateTo=" + dateTo);
+		if (json.length > 0) {
+			setupMap(JSON.stringify(json));
+		} else {
+			alert("There are no festivals in this interval and with selected genres!");
+			initialize();
 		}
-		document.getElementById('datepicker1').value = '';
-		document.getElementById('datepicker2').value = '';
-	} else {
-		alert("There are no festivals in this interval");
-		initialize();
-		document.getElementById('datepicker1').value = '';
-		document.getElementById('datepicker2').value = '';
-		
 	}
+	if (dateFrom != '' && dateTo != '' && selectedGenres == '') {
+		var json = new Array();
+		json = getData("festivals?genre=&dateFrom=" + dateFrom + "&dateTo="
+				+ dateTo);
+		if (json.length > 0) {
+			setupMap(JSON.stringify(json));
 
+		} else {
+			alert("There are no festivals in this interval!");
+			initialize();
+		}
+	}
+	if (dateFrom == '' && dateTo == '' && selectedGenres != '') {
+		var json = new Array();
+		json = getData("festivals?genre=" + selectedGenres
+				+ "&?dateFrom=&dateTo=");
+		if (json.length > 0) {
+			setupMap(JSON.stringify(json));
+		}
+
+	}
 }
 
 function setupMap(json) {
-
-	mapOptions = {
-		zoom : 3,
-		center : new google.maps.LatLng(50.086161, 14.411519999999996),
-		mapTypeId : google.maps.MapTypeId.ROADMAP
-	};
-	google_map = new google.maps.Map(document.getElementById('map-canvas'),
-			mapOptions);
-	info_window = new google.maps.InfoWindow({
-		content : 'loading'
-	});
+	/*
+	 * mapOptions = { zoom : 3, center : new google.maps.LatLng(50.086161,
+	 * 14.411519999999996), mapTypeId : google.maps.MapTypeId.ROADMAP };
+	 * google_map = new google.maps.Map(document.getElementById('map-canvas'),
+	 * mapOptions); info_window = new google.maps.InfoWindow({ content :
+	 * 'loading' });
+	 */
 
 	festivals = JSON.parse(json);
 
@@ -130,29 +143,27 @@ function setupMap(json) {
 	var l = [];
 	for (var j = 0; j < festivals.length; j++) {
 		var locationName = festivals[j].location.locationName;
-		if (location != 'Unknown' && location != '') {
-			l.push(locationName);
-			var lineup = [];
-			var lineupJSON = JSON.parse(JSON.stringify(festivals[j].lineup));
-			lineupJSON.forEach(function(artist) {
-				var artistWithGenres = artist.artistName.toUpperCase();
-				lineup.push(artistWithGenres);
-			});
-			f.push(lineup);
-			var start = festivals[j].interval.start;
-			d1.push(start);
-			var end = festivals[j].interval.end;
-			d2.push(end);
-			var festivalName = festivals[j].festivalName;
+		l.push(locationName);
+		var lineup = [];
+		var lineupJSON = JSON.parse(JSON.stringify(festivals[j].lineup));
+		lineupJSON.forEach(function(artist) {
+			var artistWithGenres = artist.artistName.toUpperCase();
+			lineup.push(artistWithGenres);
+		});
+		f.push(lineup);
+		var start = festivals[j].interval.start;
+		d1.push(start);
+		var end = festivals[j].interval.end;
+		d2.push(end);
+		var festivalName = festivals[j].festivalName;
 
-			t.push(festivalName);
-			var lat = festivals[j].location.lat;
-			x.push(lat);
-			var lng = festivals[j].location.lng;
-			y.push(lng);
-			h.push('<p><strong>' + festivalName + '</strong></br>Location: '
-					+ locationName + '</p>');
-		}
+		t.push(festivalName);
+		var lat = festivals[j].location.lat;
+		x.push(lat);
+		var lng = festivals[j].location.lng;
+		y.push(lng);
+		h.push('<p><strong>' + festivalName + '</strong></br>Location: '
+				+ locationName + '</p>');
 
 	}
 	var index = 0;
@@ -206,11 +217,12 @@ function setupMap(json) {
 	}
 }
 
-function getFestivalsWithGenre(selectValue) {
-	var json = getData("festivals?genre=" + selectValue + "&?dateFrom=&dateTo=" );
-	console.log(JSON.stringify(json));
-	setupMap(JSON.stringify(json));
+function selectGenre(selectValue) {
+	// var json = getData("festivals?genre=" + selectValue +
+	// "&?dateFrom=&dateTo=" );
+	// setupMap(JSON.stringify(json));
+	selectedGenres += selectValue + ',';
 	changeLinkColor(selectValue);
-	document.getElementById('datepicker1').value = '';
-	document.getElementById('datepicker2').value = '';
+	// document.getElementById('datepicker1').value = '';
+	// document.getElementById('datepicker2').value = '';
 }

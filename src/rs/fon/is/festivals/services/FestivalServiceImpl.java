@@ -35,15 +35,20 @@ public class FestivalServiceImpl implements FestivalService {
 		
 
 		
-		if (!genre.equals("")) {
-			query.append(" \t?festival rdf:type mo:Festival;\n");
-			query.append("	\tmo:genre ?genre .\n");
-			query.append("\t?genre a mo:Genre ;\n");
-			query.append("	\tdc:title ?genreName .\n");
-			query.append("\tFILTER regex(?genreName,\"" + genre + "\")\n");
+		if (!genre.isEmpty() && dateFrom.isEmpty() && dateTo.isEmpty()) {
+			
+			String[] genres = genre.split(",");
+			for (int i = 0; i < genres.length; i++) {
+				query.append(" \t?festival rdf:type mo:Festival;\n");
+				query.append("	\tmo:genre ?genre"+i+" .\n");
+				query.append("\t?genre"+i+" a mo:Genre ;\n");
+				query.append("	\tdc:title ?genreName"+i+" .\n");
+				query.append("\tFILTER regex(?genreName"+i+",\"" + genres[i] + "\")\n");
+			}
 			query.append("}");
+			System.out.println(query);
 		}
-		if (!dateFrom.equals("") && !dateTo.equals("")) {
+		if (!dateFrom.isEmpty() && !dateTo.isEmpty() && genre.isEmpty()) {
 			query.append(" \t?festival rdf:type mo:Festival;\n");
 			query.append("\tevent:time ?interval .\n");
 			query.append("\t?interval a tl:Interval ;\n");
@@ -54,6 +59,28 @@ public class FestivalServiceImpl implements FestivalService {
 			String tdbDateFrom = splitedDateFrom[2]+"-"+splitedDateFrom[0]+"-"+splitedDateFrom[1]+"T22:00:00Z";
 			String tdbDateTo = splitedDateTo[2]+"-"+splitedDateTo[0]+"-"+splitedDateTo[1]+"T22:00:00Z";
 			query.append("\tFILTER(?start >= \"" + tdbDateFrom + "\"^^xsd:dateTime && ?end <= \"" + tdbDateTo + "\"^^xsd:dateTime)\n");
+			query.append("}");
+			System.out.println(query);
+		}
+		
+		if (!dateFrom.isEmpty() && !dateTo.isEmpty() && !genre.isEmpty()) {
+			query.append(" \t?festival rdf:type mo:Festival;\n");
+			query.append("\tevent:time ?interval ;\n");
+			query.append("	\ttl:start ?start ;\n");
+			query.append("	\ttl:end ?end .\n");
+			String[] genres = genre.split(",");
+			for (int i = 0; i < genres.length; i++) {
+				query.append(" \t?festival rdf:type mo:Festival;\n");
+				query.append("	\tmo:genre ?genre"+i+" ;\n");
+				query.append("\t?genre"+i+" a mo:Genre ;\n");
+				query.append("	\tdc:title ?genreName"+i+" .\n");
+				query.append("\tFILTER regex(?genreName"+i+",\"" + genres[i] + "\")\n");
+			}
+			String[] splitedDateFrom = dateFrom.split("/");
+			String[] splitedDateTo = dateTo.split("/");
+			String tdbDateFrom = splitedDateFrom[2]+"-"+splitedDateFrom[0]+"-"+splitedDateFrom[1]+"T22:00:00Z";
+			String tdbDateTo = splitedDateTo[2]+"-"+splitedDateTo[0]+"-"+splitedDateTo[1]+"T22:00:00Z";
+			query.append("\tFILTER(?start >= \"" + tdbDateFrom + "\"^^xsd:dateTime && ?end <= \"" + tdbDateTo + "\"^^xsd:dateTime)\n");		
 			query.append("}");
 			System.out.println(query);
 		}
