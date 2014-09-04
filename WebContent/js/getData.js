@@ -11,9 +11,9 @@ function changeLinkColor(id) {
 	var selectedLink = '';
 
 	for (var i = 0; i < links.length; i++) {
-		if (links[i].id == id) {
+		if (links[i].id == id && links[i].className != 'btn-genre selected') {
 			selectedLink = document.getElementById(links[i].id);
-			selectedLink.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+			selectedLink.className += ' selected';
 		}
 	}
 }
@@ -21,14 +21,16 @@ function changeLinkColor(id) {
 function resetCriteria() {
 	var links = document.getElementsByTagName('a');
 	for (var i = 0; i < links.length; i++) {
-		if (links[i].className == 'btn-genre') {
-			links[i].style.backgroundColor = '#424342';
+		if (links[i].className == 'btn-genre selected') {
+			links[i].className = 'btn-genre';
 		}
 	}
 	selectedGenres = '';
 	document.getElementById('datepicker1').value = '';
 	document.getElementById('datepicker2').value = '';
 	initialize();
+	var div = document.getElementById("festInfo");
+	div.style.display = "none";
 }
 
 function addItem(json) {

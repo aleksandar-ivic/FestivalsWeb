@@ -56,7 +56,10 @@ p {
 #festName {
 	color: #424342;
 }
-
+.btn-genre.selected{
+	color: white;
+	background-color: rgba(0, 0, 0, 0.4);
+}
 .btn-genre {
 	display: inline-block;
 	padding: 6px 12px;
