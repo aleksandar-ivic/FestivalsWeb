@@ -1,18 +1,15 @@
 package rs.fon.is.festivals.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
 
-import rs.fon.is.festivals.domain.Festival;
 import rs.fon.is.festivals.domain.Genre;
 import rs.fon.is.festivals.persistence.DataModelManager;
 import rs.fon.is.festivals.util.Constants;
 import rs.fon.is.festivals.util.Util;
+
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Literal;
 
 public class GenreServiceImpl implements GenreService{
 	
@@ -23,43 +20,44 @@ public class GenreServiceImpl implements GenreService{
 	}
 
 	@Override
-	public HashMap<Genre, Integer> getAllGenres() {
-		StringBuffer query = new StringBuffer();
-		// prefix part
-		query.append("PREFIX dc:<" + Constants.DC + ">");
-		query.append("PREFIX mo:<" + Constants.MO + "> \n");
-		query.append("PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n");
-		query.append("PREFIX ns:<" + Constants.NS + "> \n");
-		// select part
-		query.append("SELECT DISTINCT ?genre \n");
-
-		// where
-		query.append("WHERE\n{\n");
-		query.append(" \t?genre rdf:type mo:Genre;\n");
-		query.append(" \tdc:title ?title.");
-		query.append("}\n");
-		query.append("ORDER BY DESC(?title)");
-		QueryExecutor queryExecutor = new QueryExecutor();
-		Collection<String> queryResults = queryExecutor
-				.executeOneVariableSelectSparqlQuery(query.toString(),
-						"genre", DataModelManager.getInstance().getModel());
-		HashMap<Genre, Integer> genresMap = new HashMap<>();
-		
-		if (queryResults != null && !queryResults.isEmpty()) {
-			for (String uri : queryResults) {
-				Genre genre = getGenre(uri);
-				FestivalServiceImpl fsi = new FestivalServiceImpl();
-				//Collection<Festival> festivals = fsi.getFestivals(genre.getTitle());
-				int numOfFestsWithGenre = fsi.getNumberOfFestivalsWithGenre(genre.getTitle());
-				genresMap.put(genre, numOfFestsWithGenre);
+	public HashMap<String, Integer> getAllGenres() {
+		String query = 
+				"PREFIX dc:<" + Constants.DC + "> \n" +
+				"PREFIX mo:<" + Constants.MO + "> \n" + 
+				"PREFIX rdf:<" + Constants.RDF + "> \n" + 
 				
-			}
-			HashMap<Genre, Integer> genresMapSorted = Util.sortMap(genresMap);
+				"SELECT DISTINCT ?title (COUNT(?festival) as ?nfestivals) \n" + 
+				"WHERE { \n" + 
+					"?festival rdf:type mo:Festival; \n" +
+						"\t mo:genre ?genre . \n" +
+				
+					"?genre rdf:type mo:Genre ; \n" + 
+						"\t dc:title ?title . \n" + 
+				"} \n" +
+					
+				"GROUP BY ?title \n" +
+				"ORDER BY DESC(?nfestivals)";
+		
+		QueryExecutor queryExecutor = new QueryExecutor();
+		
+		ResultSet queryResults = queryExecutor.executeSelectSparqlQuery(
+						query.toString(),
+						DataModelManager.getInstance().getModel());
+		
+		HashMap<String, Integer> genresMap = new HashMap<String, Integer>();
+		
+		while (queryResults.hasNext()) {
+			QuerySolution solution = (QuerySolution) queryResults.next();
 			
+			String title = ((Literal) solution.get("title")).getLexicalForm();
+			int nFestivals = ((Literal) solution.get("nfestivals")).getInt();
 			
-			return genresMapSorted;
+			genresMap.put(title, nFestivals);
 		}
-		return null;
+		HashMap<String, Integer> genresMapSorted = Util.sortMap(genresMap);
+		
+		
+		return genresMapSorted;
 	}
 
 	@Override

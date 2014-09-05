@@ -83,8 +83,8 @@ public class Util {
 		return null;
 	}
 	
-	public static HashMap<Genre, Integer> sortMap(HashMap<Genre, Integer> map){
-		HashMap<Genre, Integer> sortedMap = new LinkedHashMap<>();
+	public static HashMap<String, Integer> sortMap(HashMap<String, Integer> map){
+		HashMap<String, Integer> sortedMap = new LinkedHashMap<>();
 		LinkedList<Integer> sortedValues = new LinkedList<>(map.values());
 		Collections.sort(sortedValues, new Comparator<Integer>() {
 
@@ -94,7 +94,7 @@ public class Util {
 			}
 		});
 		for (Integer value : sortedValues) {
-			for (Genre genre : map.keySet()) {
+			for (String genre : map.keySet()) {
 				if (value == map.get(genre)) {
 					sortedMap.put(genre, value);
 				}

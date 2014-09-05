@@ -36,5 +36,11 @@ public class QueryExecutor {
 
 		return results;
 	}
+	
+	public ResultSet executeSelectSparqlQuery(String query, Model model) {
+		// Execute the query over the model
+		QueryExecution qe = QueryExecutionFactory.create(query, model);
+		return qe.execSelect();
+	}
 
 }

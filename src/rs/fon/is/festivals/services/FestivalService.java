@@ -12,5 +12,5 @@ public interface FestivalService {
 	
 	public Festival getFestival(String uri);
 
-	public int getNumberOfFestivalsWithGenre(String genre);
+	//public int getNumberOfFestivalsWithGenre(String genre);
 }

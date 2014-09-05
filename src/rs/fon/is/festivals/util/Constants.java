@@ -11,4 +11,5 @@ public class Constants {
 	public static final String TL = "http://purl.org/NET/c4dm/timeline.owl#";
 	public static final String TIME = "http://www.w3.org/2006/time#";
 	public static final String GEO = "http://www.w3.org/2003/01/geo/wgs84_pos#";
+	public static final String RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 }
