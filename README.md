@@ -100,7 +100,7 @@ SPARQL query for getting all genres:
 		dc:title ?title.  
 	  }  
 	  GROUP BY ?title
-	  ORDER BY DESC(?festivals)
+	  ORDER BY DESC(?nfestivals)
 	 	
 
 
