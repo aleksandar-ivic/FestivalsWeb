@@ -10,14 +10,14 @@ Application workflow has 5 phases:
 
 1. XML parser get's festival IDs from web service [AudioScrobbler](http://www.audioscrobbler.net/).
 2. Details about each festival is retrieved via [last.fm API](http://www.last.fm/api), including it's title, location, date interval and lineup.
-3. That data is further transformed into RDF triplets based on the following vocabularies: [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [ Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#) and [Event Ontology](http://purl.org/NET/c4dm/event.owl#).
+3. That data is further transformed into RDF triplets based on the following vocabularies: [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend - FOAF](http://xmlns.com/foaf/0.1/), [ Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#) and [Event Ontology](http://purl.org/NET/c4dm/event.owl#).
 4. Data is persisted into an RDF repository
 5. Access to the data is enabled through RESTful services
 
 
 2. Domain model
 ===============
-Data about festivals from the [last.fm](http://www.last.fm/) website is analyzed in order to determine which classes and properties from the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#) and [Event Ontology](http://purl.org/NET/c4dm/event.owl#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
+Data about festivals from the [last.fm](http://www.last.fm/) website is analyzed in order to determine which classes and properties from the [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend - FOAF](http://xmlns.com/foaf/0.1/), [Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#) and [Event Ontology](http://purl.org/NET/c4dm/event.owl#) vocabularies are supported. Based on that information, domain model is created (Picture 1).
 
 ![domain](https://github.com/TheCoa/FestivalsWeb/blob/master/docs/image/domain_model.png)
 
@@ -38,7 +38,7 @@ Class Genre contains name of a genre.
 
 [Last.fm](http://www.last.fm/) is a music recommendation service. In order to use it, it is necessary to [sign up](https://secure.last.fm/join) for an account and to download [The Scrobbler](http://www.last.fm/download) which helps user to discover more music based on the songs they play. Last.fm has its own [API](http://www.last.fm/api) for accessing it's data. Only registered last.fm user can use services of the API.
 
-This application retrieves data about music festivals in Europe from the last.fm via its API. First, festival IDs are fetched from the AudioScrobbler WebService. Than those IDs are passed to last.fm API, which returns data about those festivals. This data is further transformed into RDF triplets based on [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#) and [Event Ontology](http://purl.org/NET/c4dm/event.owl#) vocabularies, that are persisted into an RDF repository. 
+This application retrieves data about music festivals in Europe from the last.fm via its API. First, festival IDs are fetched from the AudioScrobbler WebService. Than those IDs are passed to last.fm API, which returns data about those festivals. This data is further transformed into RDF triplets based on [Dublin Core](http://purl.org/dc/elements/1.1/), [Music Ontology](http://purl.org/ontology/mo/), [Friend of a Friend - FOAF](http://xmlns.com/foaf/0.1/), [Geo](http://www.w3.org/2003/01/geo/wgs84_pos#), [Timeline Ontology](http://purl.org/NET/c4dm/timeline.owl#) and [Event Ontology](http://purl.org/NET/c4dm/event.owl#) vocabularies, that are persisted into an RDF repository. 
 
 The application allows access to that data through RESTful services:
 
