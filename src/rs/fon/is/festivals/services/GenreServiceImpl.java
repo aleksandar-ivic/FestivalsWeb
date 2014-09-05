@@ -37,7 +37,7 @@ public class GenreServiceImpl implements GenreService{
 					
 				"GROUP BY ?title \n" +
 				"ORDER BY DESC(?nfestivals)";
-		
+		System.out.println(query);
 		QueryExecutor queryExecutor = new QueryExecutor();
 		
 		ResultSet queryResults = queryExecutor.executeSelectSparqlQuery(
